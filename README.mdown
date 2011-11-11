@@ -1,0 +1,7 @@
+Reflets.info ipad viewer
+============================================================
+Loosely based on:
+* https://github.com/raweng/FlipView
+
+RSS are handled with:
+* https://github.com/mwaterfall
