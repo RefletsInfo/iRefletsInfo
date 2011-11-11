@@ -51,6 +51,9 @@
 -(void)showViewInFullScreen:(UIViewExtention*)viewToShow withModel:(MessageModel*)model;
 -(void)closeFullScreen;
 -(void)buildPages:(NSArray*)messagesArray;
+-(void)loadFeeds:(NSString*)url;
+-(void)saveCache;
+-(void)loadCache;
 
 @property (nonatomic, assign) NSMutableArray* viewControlerStack;
 @property (nonatomic, assign) UIGestureRecognizer* gestureRecognizer;

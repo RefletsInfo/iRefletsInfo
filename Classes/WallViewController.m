@@ -48,39 +48,103 @@
 #import "HeaderView.h"
 
 #import "MessageModel.h"
+#import "MBProgressHUD.h"
 
 @implementation WallViewController
-
 @synthesize viewControlerStack,gestureRecognizer,wallTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
    
-    if ( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+    if ( (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) ) {
 		[self.view setBackgroundColor:[UIColor whiteColor]];
 		isInFullScreenMode = FALSE;
 		
-		messageArrayCollection = [[NSMutableArray alloc] init];
-		
-        // Create feed parser and pass the URL of the feed
-        
-        NSURL *feedURL = [NSURL URLWithString:@"http://reflets.info/feed/"];
-        feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-        
-        // Delegate must conform to `MWFeedParserDelegate`
-        feedParser.delegate = self;
-        // Parse the feeds info (title, link) and all feed items
-        feedParser.feedParseType = ParseTypeFull;
-
-        // Begin parsing
-        [feedParser parse];
-		
-		flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
-		flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		flipper.dataSource = self;
-		[self.view addSubview:flipper];
-		
+        [self loadCache];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{       
+            [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+            [self loadFeeds:@"http://reflets.info/feed/"];
+            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+        });
     }
     return self;
+}
+
+- (void)loadFeeds:(NSString*)url
+{
+    if (messageArrayCollection) {
+        [messageArrayCollection release];
+    }
+    messageArrayCollection = [[NSMutableArray alloc] init];
+    
+    // Create feed parser and pass the URL of the feed
+    NSURL *feedURL = [NSURL URLWithString:url];
+    
+    if (feedParser) {
+        [feedParser release];
+    }
+    feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+    
+    // Delegate must conform to `MWFeedParserDelegate`
+    feedParser.delegate = self;
+    // Parse the feeds info (title, link) and all feed items
+    feedParser.feedParseType = ParseTypeFull;
+    
+    // Begin parsing
+    [feedParser parse];
+    if (flipper) {
+        [flipper removeFromSuperview];
+        [flipper release];
+    }
+    
+    flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
+    flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    flipper.dataSource = self;
+    [self.view addSubview:flipper];
+}
+
+- (void)saveCache 
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"feeds.data"];
+    NSLog(@"saving data to %@", filePath);
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:messageArrayCollection];
+    BOOL res = [data writeToFile:filePath atomically:TRUE];
+    if (!res) {
+        NSLog(@"Error");
+    }
+}
+
+- (void) loadCache
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"feeds.data"];
+    
+    NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
+    if (!data) {
+        return;
+    }
+    NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    [data release];
+    
+    if (messageArrayCollection) {
+        [messageArrayCollection release];
+    }
+    messageArrayCollection = [[NSMutableArray alloc] initWithArray:array];
+
+    [self buildPages:messageArrayCollection];
+    
+    if (flipper) {
+        [flipper removeFromSuperview];
+        [flipper release];
+    }
+    
+    flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
+    flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    flipper.dataSource = self;
+    [self.view addSubview:flipper];
+    
 }
 
 - (int)getRandomNumber:(int)from to:(int)to {
@@ -89,9 +153,12 @@
 
 
 -(void)buildPages:(NSArray*)messageArray {
-	
 	self.view.autoresizesSubviews = YES;
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    if (viewControlerStack) {
+        [viewControlerStack release];
+        viewControlerStack = nil;
+    }
 	viewControlerStack = [[NSMutableArray alloc] init]; 
 	
 	int remainingMessageCount = 0;
@@ -439,7 +506,6 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"yyyy-MM-dd HH:mm:ss zzz"]; 
     NSString *stringFromDate = [formatter stringFromDate:item.date];
-
     
     MessageModel* messageModel1 = [[MessageModel alloc] init];
     messageModel1.messageID= [messageArrayCollection count];
@@ -455,14 +521,15 @@
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser
 {
-    // here
+    [self saveCache];
+    [self closeFullScreen];
     [self buildPages:messageArrayCollection];
 }
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error
 {
-    // here
-    [self buildPages:messageArrayCollection];
+    NSLog(@"Hi, error");
+    //[self buildPages:messageArrayCollection];
 }
 
 @end

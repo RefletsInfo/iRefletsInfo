@@ -48,11 +48,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after app launch. 
-	viewController = [[WallViewController alloc] initWithNibName:nil bundle:nil];
-	
+    viewController = [[WallViewController alloc] initWithNibName:nil bundle:nil];
     [self.window addSubview:viewController.view];
     [self.window makeKeyAndVisible];
-
 	return YES;
 }
 

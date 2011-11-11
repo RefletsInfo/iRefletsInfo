@@ -31,7 +31,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MessageModel : NSObject {
+@interface MessageModel : NSObject <NSCoding> {
 	NSInteger messageID;
 	NSString* content;
 	NSString* createdAt;

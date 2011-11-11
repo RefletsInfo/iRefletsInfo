@@ -30,6 +30,12 @@
 //
 
 #import "MessageModel.h"
+#define kMessageIDKey      @"id"
+#define kContentKey        @"content"
+#define kCreatedAtKey      @"created_at"
+#define kUserName          @"userName"
+#define kUserImage         @"userImage"
+
 
 @implementation MessageModel
 
@@ -41,11 +47,11 @@
 
 -(id)initWithMessageObject:(NSDictionary*)messageObject {
 	if (self = [super init]) {
-		self.messageID = (NSInteger)[[messageObject objectForKey:@"id"] intValue];
-		self.content = [messageObject objectForKey:@"content"];
-		self.createdAt = [messageObject objectForKey:@"created_at"];
-		self.userName = [messageObject objectForKey:@"userName"];
-		self.userImage = [messageObject objectForKey:@"userImage"];
+		self.messageID = (NSInteger)[[messageObject objectForKey:kMessageIDKey] intValue];
+		self.content = [messageObject objectForKey:kContentKey];
+		self.createdAt = [messageObject objectForKey:kCreatedAtKey];
+		self.userName = [messageObject objectForKey:kUserName];
+		self.userImage = [messageObject objectForKey:kUserImage];
 	}
 	return self;
 }
@@ -57,6 +63,34 @@
 	[userName release];
 	[userImage release];
 	[super dealloc];
+}
+
+#pragma mark - NSCoding
+#pragma mark NSCoding
+
+
+- (void) encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeInteger:messageID forKey:kMessageIDKey];
+    [encoder encodeObject:content forKey:kContentKey];
+    [encoder encodeObject:createdAt forKey:kCreatedAtKey];
+    [encoder encodeObject:userName forKey:kUserName];
+    [encoder encodeObject:userImage forKey:kUserImage];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    id msgId = [decoder decodeObjectForKey:kMessageIDKey];
+    
+    if (msgId) {
+        [dict setObject:msgId forKey:kMessageIDKey];
+    }
+    [dict setObject:[decoder decodeObjectForKey:kContentKey] forKey:kContentKey];
+    [dict setObject:[decoder decodeObjectForKey:kCreatedAtKey] forKey:kCreatedAtKey];
+    [dict setObject:[decoder decodeObjectForKey:kUserName] forKey:kUserName];
+    [dict setObject:[decoder decodeObjectForKey:kUserImage] forKey:kUserImage];
+    id res = [self initWithMessageObject:dict];
+    [dict release];
+    return res;
 }
 
 @end
