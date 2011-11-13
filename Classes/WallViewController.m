@@ -144,7 +144,9 @@
     if (!data) {
         return NO;
     }
+    NSLog(@"data = %@", data);
     NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSLog(@"collection = %@", array);
     [data release];
     
     if (messageArrayCollection) {
@@ -533,13 +535,13 @@
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser
 {
-    [self saveCache];
     [self closeFullScreen];
     
     if (messageArrayCollection) {
         [messageArrayCollection release];
     }
     messageArrayCollection = [[NSMutableArray alloc] initWithArray:tempMessageArrayCollection];
+    [self saveCache];
     [self buildPages:messageArrayCollection];
 }
 
