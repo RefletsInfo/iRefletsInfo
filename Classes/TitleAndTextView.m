@@ -86,8 +86,8 @@
 
 	userNameLabel = [[UILabel alloc] init];
 	[userNameLabel setText:[NSString stringWithFormat:@"%@",messageModel.userName]];
-	userNameLabel.font =[UIFont fontWithName:@"Helvetica" size:25];
-	[userNameLabel setTextColor:RGBCOLOR(2,90,177)];
+	userNameLabel.font =[UIFont fontWithName:@"Arial-BoldMT" size:30];
+	[userNameLabel setTextColor:RGBCOLOR(0,0,0)];
 	[userNameLabel setBackgroundColor:[UIColor clearColor]];
 	[contentView addSubview:userNameLabel];
 	
@@ -100,7 +100,7 @@
 	[contentView addSubview:timeStampLabel];
 	
 	messageLabel = [[UILabel alloc] init];
-	messageLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
+	messageLabel.font = [UIFont fontWithName:@"Georgia" size:20];
 	messageLabel.textColor =  RGBCOLOR(33,33,33);
 	messageLabel.highlightedTextColor = RGBCOLOR(33,33,33);
 	messageLabel.contentMode = UIViewContentModeCenter;

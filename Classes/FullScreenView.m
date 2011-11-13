@@ -51,7 +51,7 @@
 		[contentView addSubview:userImageView];
 		
 		userNameLabel = [[UILabel alloc] init];
-		userNameLabel.font =[UIFont fontWithName:@"Helvetica" size:25];
+		userNameLabel.font =[UIFont fontWithName:@"Arial-BoldMT" size:30];
 		[userNameLabel setTextColor:RGBCOLOR(2,90,177)];
 		[userNameLabel setBackgroundColor:[UIColor clearColor]];
 		[userNameLabel setText:[NSString stringWithFormat:@"%@",messageModel.userName]];
@@ -74,7 +74,7 @@
 		
 		messageLabel = [[UILabel alloc] init];
 		messageLabel.numberOfLines = 0;	
-		messageLabel.font = [UIFont fontWithName:@"Helvetica" size:22];		
+		messageLabel.font = [UIFont fontWithName:@"Georgia" size:22];		
 		messageLabel.textColor =  RGBCOLOR(33,33,33);
 		messageLabel.highlightedTextColor = RGBCOLOR(33,33,33);
 		[messageLabel setBackgroundColor:[UIColor clearColor]];

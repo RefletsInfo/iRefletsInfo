@@ -38,6 +38,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		B152A122146FC19100F3E0D0 /* logo-reflets.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A121146FC19100F3E0D0 /* logo-reflets.jpg */; };
+		B152A124146FC22700F3E0D0 /* logo-reflets-header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */; };
 		B15AA769146D6FB000131196 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B15AA768146D6FB000131196 /* MBProgressHUD.m */; };
 		B17AF59B142623E6004B50AF /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF58B142623E6004B50AF /* GTMNSString+HTML.m */; };
 		B17AF59C142623E6004B50AF /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF58D142623E6004B50AF /* MWFeedInfo.m */; };
@@ -102,6 +104,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iRefletsInfo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRefletsInfo_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iRefletsInfo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iRefletsInfo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		B152A121146FC19100F3E0D0 /* logo-reflets.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets.jpg"; sourceTree = "<group>"; };
+		B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets-header.jpg"; sourceTree = "<group>"; };
 		B15AA767146D6FB000131196 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ../../../../github/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		B15AA768146D6FB000131196 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../../../../github/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		B17AF58A142623E6004B50AF /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */,
+				B152A121146FC19100F3E0D0 /* logo-reflets.jpg */,
 				18D45F7A13D4365000BB814D /* close-popup.png */,
 				180E01AB13D1B201005DF14C /* missing-people.png */,
 				1873AC0B13D173AC001A999B /* unselected-page.png */,
@@ -377,6 +383,8 @@
 				180E01AC13D1B201005DF14C /* missing-people.png in Resources */,
 				18D45F7B13D4365000BB814D /* close-popup.png in Resources */,
 				18FD403713DB18460080C465 /* License in Resources */,
+				B152A122146FC19100F3E0D0 /* logo-reflets.jpg in Resources */,
+				B152A124146FC22700F3E0D0 /* logo-reflets-header.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
