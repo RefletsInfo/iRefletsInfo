@@ -33,6 +33,8 @@
 
 @interface MessageModel : NSObject <NSCoding> {
 	NSInteger messageID;
+	NSString* summary;
+    NSString* link;
 	NSString* content;
 	NSString* createdAt;
 	NSString* userName;
@@ -42,7 +44,9 @@
 -(id)initWithMessageObject:(NSDictionary*)messageObject;
 
 @property (nonatomic,assign) NSInteger messageID;
+@property (nonatomic,retain) NSString* summary;
 @property (nonatomic,retain) NSString* content;
+@property (nonatomic,retain) NSString* link;
 @property (nonatomic,retain) NSString* createdAt;
 @property (nonatomic,retain) NSString* userName;
 @property (nonatomic,retain) NSString* userImage;

@@ -64,7 +64,7 @@
 	[messageLabel setFrame:CGRectMake(userImageView.frame.origin.x ,(userImageView.frame.origin.y + userImageView.frame.size.height), contentViewArea.width, contentViewArea.height - (userImageView.frame.origin.y + userImageView.frame.size.height))];	
 		
 		
-	[messageLabel setText:messageModel.content];
+	[messageLabel setText:messageModel.summary];
 	messageLabel.contentMode = UITextAlignmentLeft;
 		
 //		float widthOffset = (messageLabel.frame.size.width - textSize.width)/ 2;
@@ -86,7 +86,7 @@
 
 	userNameLabel = [[UILabel alloc] init];
 	[userNameLabel setText:[NSString stringWithFormat:@"%@",messageModel.userName]];
-	userNameLabel.font =[UIFont fontWithName:@"Arial-BoldMT" size:30];
+	userNameLabel.font =[UIFont fontWithName:@"Arial-BoldMT" size:20];
 	[userNameLabel setTextColor:RGBCOLOR(0,0,0)];
 	[userNameLabel setBackgroundColor:[UIColor clearColor]];
 	[contentView addSubview:userNameLabel];

@@ -39,10 +39,10 @@
 	if (self = [super init]) {
 		messageModel = model;
 		
-		[self setBackgroundColor:RGBCOLOR(243,243,243)];
+		[self setBackgroundColor:RGBCOLOR(255,255,255)];
 		
 		contentView = [[UIView alloc] init];
-		[contentView setBackgroundColor:RGBCOLOR(243,243,243)];
+		[contentView setBackgroundColor:RGBCOLOR(255,255,255)];
 		
 		userImageView = [[UIImageView alloc] init];
 		[userImageView setBackgroundColor:[UIColor clearColor]];
@@ -52,12 +52,14 @@
 		
 		userNameLabel = [[UILabel alloc] init];
 		userNameLabel.font =[UIFont fontWithName:@"Arial-BoldMT" size:30];
-		[userNameLabel setTextColor:RGBCOLOR(2,90,177)];
+		[userNameLabel setTextColor:RGBCOLOR(0,0,0)];
 		[userNameLabel setBackgroundColor:[UIColor clearColor]];
 		[userNameLabel setText:[NSString stringWithFormat:@"%@",messageModel.userName]];
 		[userNameLabel setFrame:CGRectMake(userImageView.frame.origin.x + userImageView.frame.size.width + 10, 5, 0, 0)];
+		userNameLabel.adjustsFontSizeToFitWidth = NO;
+        userNameLabel.numberOfLines = 0;
+        
 		[contentView addSubview:userNameLabel];
-		
 		timeStampLabel = [[UILabel alloc] init];
 		[timeStampLabel setText:messageModel.createdAt];
 		timeStampLabel.font =[UIFont fontWithName:@"Helvetica" size:12];
@@ -70,17 +72,13 @@
 		scrollView = [[UIScrollView alloc] init];
 		[scrollView setBackgroundColor:[UIColor clearColor]];
 		[scrollView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, 0, 0)];
-		[contentView addSubview:scrollView];
+//		[contentView addSubview:scrollView];
 		
-		messageLabel = [[UILabel alloc] init];
-		messageLabel.numberOfLines = 0;	
-		messageLabel.font = [UIFont fontWithName:@"Georgia" size:22];		
-		messageLabel.textColor =  RGBCOLOR(33,33,33);
-		messageLabel.highlightedTextColor = RGBCOLOR(33,33,33);
-		[messageLabel setBackgroundColor:[UIColor clearColor]];
-		messageLabel.alpha = 0;	
-		[scrollView addSubview:messageLabel];
-		
+        webView = [[UIWebView alloc] init];
+        webView.alpha = 1;
+        [webView setBackgroundColor:[UIColor clearColor]];
+		[webView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, 0, 0)];
+        [contentView addSubview:webView];
 		
 		closeButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		UIImageView* closeImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"close-popup.png"]];
@@ -101,28 +99,32 @@
 
 - (void)reAdjustLayout{
 	
-		[contentView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-		CGSize contentViewArea = CGSizeMake(contentView.frame.size.width, contentView.frame.size.height);
-		
-		//[userImageView setFrame:CGRectMake(10, 10, 130, 130)];
-	
-		[userNameLabel sizeToFit];
-		[userNameLabel setFrame:CGRectMake(userImageView.frame.origin.x + userImageView.frame.size.width + 10, 5, (contentViewArea.width - (userImageView.frame.size.width + 10)) - 30, userNameLabel.frame.size.height)];
+    [contentView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    CGSize contentViewArea = CGSizeMake(contentView.frame.size.width, contentView.frame.size.height);
+    
+    //[userImageView setFrame:CGRectMake(10, 10, 130, 130)];
 
-		[timeStampLabel sizeToFit];
-		[timeStampLabel setFrame:CGRectMake(userNameLabel.frame.origin.x, userNameLabel.frame.origin.y + userNameLabel.frame.size.height, timeStampLabel.frame.size.width, timeStampLabel.frame.size.height)];
+    [userNameLabel sizeToFit];
+    [userNameLabel setFrame:CGRectMake(userImageView.frame.origin.x + userImageView.frame.size.width + 10, 5, (contentViewArea.width - (userImageView.frame.size.width + 10)) - 30, userNameLabel.frame.size.height)];
 
-		[closeButton setFrame:CGRectMake(contentViewArea.width - 30, 0, 30, 30)];
-	
-		[scrollView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, contentViewArea.width-20, contentViewArea.height - (userImageView.frame.origin.y + userImageView.frame.size.height + 10))];
+    [timeStampLabel sizeToFit];
+    [timeStampLabel setFrame:CGRectMake(userNameLabel.frame.origin.x, userNameLabel.frame.origin.y + userNameLabel.frame.size.height, timeStampLabel.frame.size.width, timeStampLabel.frame.size.height)];
 
-		///////////////////////////////////////////////////////////////
-		[messageLabel setText:messageModel.content];
-		messageLabel.numberOfLines = 0;
-		[messageLabel sizeToFit];
-		[messageLabel setFrame:CGRectMake(0, 0, scrollView.frame.size.width,messageLabel.frame.size.height)];
+    [closeButton setFrame:CGRectMake(contentViewArea.width - 30, 0, 30, 30)];
 
-		[scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, messageLabel.frame.origin.y + messageLabel.frame.size.height)];
+    [scrollView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, contentViewArea.width-20, contentViewArea.height - (userImageView.frame.origin.y + userImageView.frame.size.height + 10))];
+
+    ///////////////////////////////////////////////////////////////
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSURL *baseURL = [NSURL fileURLWithPath:path];
+    NSString *contentWithCSS = [[NSString alloc] initWithFormat:@"<link rel='stylesheet' href='style.css' type='text/css' media='screen' />%@", messageModel.content];
+    [webView loadHTMLString:contentWithCSS baseURL:baseURL];
+    [contentWithCSS release];
+    [webView sizeToFit];
+    [webView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, contentViewArea.width-20, contentViewArea.height - (userImageView.frame.origin.y + userImageView.frame.size.height + 10))];
+//    [webView setFrame:CGRectMake(0, 0, scrollView.frame.size.width,webView.frame.size.height)];
+//
+//    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, webView.frame.origin.y + webView.frame.size.height)];
 	
 }
 
@@ -160,12 +162,14 @@
 	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:nil cache:NO];
 	timeStampLabel.alpha = 1;
 	closeButton.alpha = 1;
-	messageLabel.alpha = 1;
+	webView.alpha = 1;
 	[UIView commitAnimations];
 }
 
 
 -(void) dealloc {
+    [webView release];
+    webView=nil;
 	[closeButton release];
 	closeButton=nil;
 	[userImageView release];
@@ -174,8 +178,6 @@
 	userNameLabel=nil;
 	[timeStampLabel release];
 	timeStampLabel=nil;
-	[messageLabel release];
-	messageLabel=nil;
 	[scrollView release];
 	scrollView=nil;
 	[contentView release];

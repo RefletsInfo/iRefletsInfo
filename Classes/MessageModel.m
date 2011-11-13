@@ -32,6 +32,8 @@
 #import "MessageModel.h"
 #define kMessageIDKey      @"id"
 #define kContentKey        @"content"
+#define kSummaryKey        @"summary"
+#define kLinkKey           @"link"
 #define kCreatedAtKey      @"created_at"
 #define kUserName          @"userName"
 #define kUserImage         @"userImage"
@@ -44,11 +46,15 @@
 @synthesize createdAt;
 @synthesize userName;
 @synthesize userImage;
+@synthesize link;
+@synthesize summary;
 
 -(id)initWithMessageObject:(NSDictionary*)messageObject {
 	if (self = [super init]) {
 		self.messageID = (NSInteger)[[messageObject objectForKey:kMessageIDKey] intValue];
 		self.content = [messageObject objectForKey:kContentKey];
+		self.summary = [messageObject objectForKey:kSummaryKey];
+		self.link = [messageObject objectForKey:kLinkKey];
 		self.createdAt = [messageObject objectForKey:kCreatedAtKey];
 		self.userName = [messageObject objectForKey:kUserName];
 		self.userImage = [messageObject objectForKey:kUserImage];
@@ -58,6 +64,8 @@
 
 
 - (void) dealloc {
+	[link release];
+	[summary release];
 	[content release];
 	[createdAt release];
 	[userName release];
@@ -72,6 +80,8 @@
 - (void) encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeInteger:messageID forKey:kMessageIDKey];
     [encoder encodeObject:content forKey:kContentKey];
+    [encoder encodeObject:summary forKey:kSummaryKey];
+    [encoder encodeObject:link forKey:kLinkKey];
     [encoder encodeObject:createdAt forKey:kCreatedAtKey];
     [encoder encodeObject:userName forKey:kUserName];
     [encoder encodeObject:userImage forKey:kUserImage];
@@ -84,6 +94,9 @@
     if (msgId) {
         [dict setObject:msgId forKey:kMessageIDKey];
     }
+    [dict setObject:[decoder decodeObjectForKey:kContentKey] forKey:kContentKey];
+    [dict setObject:[decoder decodeObjectForKey:kSummaryKey] forKey:kSummaryKey];
+    [dict setObject:[decoder decodeObjectForKey:kLinkKey] forKey:kLinkKey];
     [dict setObject:[decoder decodeObjectForKey:kContentKey] forKey:kContentKey];
     [dict setObject:[decoder decodeObjectForKey:kCreatedAtKey] forKey:kCreatedAtKey];
     [dict setObject:[decoder decodeObjectForKey:kUserName] forKey:kUserName];

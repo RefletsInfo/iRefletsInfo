@@ -40,7 +40,7 @@
 	UIImageView* userImageView;
 	UILabel* userNameLabel;
 	UILabel* timeStampLabel;
-	UILabel* messageLabel;
+    UIWebView* webView;
 
 	UIViewExtention* viewToOverLap;
 	UIView* fullScreenBG;

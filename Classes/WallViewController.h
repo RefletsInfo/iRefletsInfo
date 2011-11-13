@@ -55,7 +55,7 @@
 -(void)buildPages:(NSArray*)messagesArray;
 -(void)loadFeeds:(NSString*)url;
 -(void)saveCache;
--(void)loadCache;
+-(BOOL)loadCache;
 
 @property (nonatomic, assign) NSMutableArray* viewControlerStack;
 @property (nonatomic, assign) UIGestureRecognizer* gestureRecognizer;

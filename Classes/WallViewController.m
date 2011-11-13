@@ -62,7 +62,11 @@
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFeeds:) name:kNotificationRefreshFeeds object:nil];    
         
-        [self loadCache];
+        if (![self loadCache]) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+            [self loadFeeds:kFeedsURL];
+            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+        };
     }
     return self;
 }
@@ -70,6 +74,9 @@
 -(void) refreshFeeds:(NSNotification *) notification
 {
     UIView *view = [self.view viewWithTag:42];
+    if (!view) {
+        view = self.view;
+    }
     [MBProgressHUD showHUDAddedTo:view animated:TRUE];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{       
         [self loadFeeds:kFeedsURL];
@@ -127,7 +134,7 @@
     }
 }
 
-- (void) loadCache
+- (BOOL) loadCache
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -135,7 +142,7 @@
     
     NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
     if (!data) {
-        return;
+        return NO;
     }
     NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     [data release];
@@ -147,6 +154,7 @@
 
     [self buildPages:messageArrayCollection];
     [self addFlipperView];
+    return YES;
 }
 
 - (int)getRandomNumber:(int)from to:(int)to {
@@ -515,8 +523,9 @@
     messageModel1.userName = item.title;
     messageModel1.userImage =  @"missing-people.png";
     messageModel1.createdAt = stringFromDate;
-    messageModel1.content = [item.summary stringByConvertingHTMLToPlainText];
-    
+    messageModel1.link = item.link;
+    messageModel1.content = item.content;
+    messageModel1.summary = [item.summary stringByConvertingHTMLToPlainText];
     [tempMessageArrayCollection addObject:messageModel1];
     [messageModel1 release];
     [formatter release];
