@@ -97,7 +97,6 @@
     [dict setObject:[decoder decodeObjectForKey:kContentKey] forKey:kContentKey];
     [dict setObject:[decoder decodeObjectForKey:kSummaryKey] forKey:kSummaryKey];
     [dict setObject:[decoder decodeObjectForKey:kLinkKey] forKey:kLinkKey];
-    [dict setObject:[decoder decodeObjectForKey:kContentKey] forKey:kContentKey];
     [dict setObject:[decoder decodeObjectForKey:kCreatedAtKey] forKey:kCreatedAtKey];
     [dict setObject:[decoder decodeObjectForKey:kUserName] forKey:kUserName];
     [dict setObject:[decoder decodeObjectForKey:kUserImage] forKey:kUserImage];
