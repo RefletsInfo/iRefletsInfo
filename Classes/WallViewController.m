@@ -49,6 +49,7 @@
 
 #import "MessageModel.h"
 #import "MBProgressHUD.h"
+#import "Constants.h"
 
 @implementation WallViewController
 @synthesize viewControlerStack,gestureRecognizer,wallTitle;
@@ -58,23 +59,42 @@
     if ( (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) ) {
 		[self.view setBackgroundColor:[UIColor whiteColor]];
 		isInFullScreenMode = FALSE;
-		
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFeeds:) name:kNotificationRefreshFeeds object:nil];    
+        
         [self loadCache];
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{       
-            [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
-            [self loadFeeds:@"http://reflets.info/feed/"];
-            [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-        });
     }
     return self;
 }
 
+-(void) refreshFeeds:(NSNotification *) notification
+{
+    UIView *view = [self.view viewWithTag:42];
+    [MBProgressHUD showHUDAddedTo:view animated:TRUE];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{       
+        [self loadFeeds:kFeedsURL];
+        [MBProgressHUD hideHUDForView:view animated:TRUE];
+    });
+}
+
+- (void) addFlipperView
+{
+    if (flipper) {
+        [flipper removeFromSuperview];
+        [flipper release];
+    }
+    flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
+    flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    flipper.dataSource = self;
+    flipper.tag = kFlipperViewTag;
+    [self.view addSubview:flipper];
+}
 - (void)loadFeeds:(NSString*)url
 {
-    if (messageArrayCollection) {
-        [messageArrayCollection release];
+    if (tempMessageArrayCollection) {
+        [tempMessageArrayCollection release];
     }
-    messageArrayCollection = [[NSMutableArray alloc] init];
+    tempMessageArrayCollection = [[NSMutableArray alloc] init];
     
     // Create feed parser and pass the URL of the feed
     NSURL *feedURL = [NSURL URLWithString:url];
@@ -91,15 +111,7 @@
     
     // Begin parsing
     [feedParser parse];
-    if (flipper) {
-        [flipper removeFromSuperview];
-        [flipper release];
-    }
-    
-    flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
-    flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    flipper.dataSource = self;
-    [self.view addSubview:flipper];
+    [self addFlipperView];
 }
 
 - (void)saveCache 
@@ -134,17 +146,7 @@
     messageArrayCollection = [[NSMutableArray alloc] initWithArray:array];
 
     [self buildPages:messageArrayCollection];
-    
-    if (flipper) {
-        [flipper removeFromSuperview];
-        [flipper release];
-    }
-    
-    flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
-    flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    flipper.dataSource = self;
-    [self.view addSubview:flipper];
-    
+    [self addFlipperView];
 }
 
 - (int)getRandomNumber:(int)from to:(int)to {
@@ -193,7 +195,6 @@
 }
 
 - (UIView *) viewForPage:(NSInteger) page inFlipper:(AFKPageFlipper *) pageFlipper {
-
   	LayoutViewExtention* layoutToReturn = nil;
 	NSInteger layoutNumber = [[viewControlerStack objectAtIndex:page-1] intValue];
 	
@@ -255,36 +256,35 @@
 		id layoutObject = [[[class alloc] init] autorelease];
 		
 		if ([layoutObject isKindOfClass:[LayoutViewExtention class]] ) {
-			
-			layoutToReturn = (LayoutViewExtention*)layoutObject;
-			
-			[layoutToReturn initalizeViews:viewDictonary];
-			[layoutToReturn rotate:self.interfaceOrientation animation:NO];
-			[layoutToReturn setFrame:self.view.bounds];
-			layoutToReturn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-			
-			HeaderView* headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, layoutToReturn.frame.size.width, 50)];
-			headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-			[headerView setWallTitleText:@"reflets.info"];
-			[headerView setBackgroundColor:[UIColor whiteColor]];
-			[headerView rotate:self.interfaceOrientation animation:NO];
-			[layoutToReturn setHeaderView:headerView];
-			[headerView release];
-			
-			FooterView* footerView = [[FooterView alloc] initWithFrame:CGRectMake(0, layoutToReturn.frame.size.height - 20, layoutToReturn.frame.size.width, 20)];
-			[footerView setBackgroundColor:[UIColor whiteColor]];
-			[footerView setFlipperView:flipper];
-			[footerView setViewArray:viewControlerStack];
-			
-			if (self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-				[footerView setFrame:CGRectMake(0, 1004 - 20, 768, footerView.frame.size.height)];
-			}else {
-				[footerView setFrame:CGRectMake(0, 748 - 20, 1024, footerView.frame.size.height)];
-			}
-			[footerView rotate:self.interfaceOrientation animation:YES];
-			
-			[layoutToReturn setFooterView:footerView];
-			[footerView release];
+            layoutToReturn = (LayoutViewExtention*)layoutObject;
+            
+            [layoutToReturn initalizeViews:viewDictonary];
+            [layoutToReturn rotate:self.interfaceOrientation animation:NO];
+            [layoutToReturn setFrame:self.view.bounds];
+            layoutToReturn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            
+            HeaderView* headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, layoutToReturn.frame.size.width, 50)];
+            headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            [headerView setWallTitleText:@"reflets.info"];
+            [headerView setBackgroundColor:[UIColor whiteColor]];
+            [headerView rotate:self.interfaceOrientation animation:NO];
+            [layoutToReturn setHeaderView:headerView];
+            [headerView release];
+            
+            FooterView* footerView = [[FooterView alloc] initWithFrame:CGRectMake(0, layoutToReturn.frame.size.height - 20, layoutToReturn.frame.size.width, 20)];
+            [footerView setBackgroundColor:[UIColor whiteColor]];
+            [footerView setFlipperView:flipper];
+            [footerView setViewArray:viewControlerStack];
+            
+            if (self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+                [footerView setFrame:CGRectMake(0, 1004 - 20, 768, footerView.frame.size.height)];
+            }else {
+                [footerView setFrame:CGRectMake(0, 748 - 20, 1024, footerView.frame.size.height)];
+            }
+            [footerView rotate:self.interfaceOrientation animation:YES];
+            
+            [layoutToReturn setFooterView:footerView];
+            [footerView release];
 		}
 	}
 	
@@ -474,9 +474,11 @@
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
     [feedParser release];
     
+    if (tempMessageArrayCollection) {
+        [tempMessageArrayCollection release];
+    }
 	[messageArrayCollection release];
 	if (fullScreenBGView != nil) {
 		[fullScreenBGView release];
@@ -488,6 +490,7 @@
 		[fullScreenView release];
 	}
 	[wallTitle release];
+    [toolbar release];
     [super dealloc];
 }
 
@@ -514,7 +517,7 @@
     messageModel1.createdAt = stringFromDate;
     messageModel1.content = [item.summary stringByConvertingHTMLToPlainText];
     
-    [messageArrayCollection addObject:messageModel1];
+    [tempMessageArrayCollection addObject:messageModel1];
     [messageModel1 release];
     [formatter release];
 }
@@ -523,6 +526,11 @@
 {
     [self saveCache];
     [self closeFullScreen];
+    
+    if (messageArrayCollection) {
+        [messageArrayCollection release];
+    }
+    messageArrayCollection = [[NSMutableArray alloc] initWithArray:tempMessageArrayCollection];
     [self buildPages:messageArrayCollection];
 }
 

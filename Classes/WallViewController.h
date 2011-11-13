@@ -45,7 +45,9 @@
 	NSString* wallTitle;
 	BOOL isInFullScreenMode;
 	NSMutableArray* messageArrayCollection;
+	NSMutableArray* tempMessageArrayCollection;
     MWFeedParser *feedParser;
+    UIToolbar *toolbar;
 }
 
 -(void)showViewInFullScreen:(UIViewExtention*)viewToShow withModel:(MessageModel*)model;

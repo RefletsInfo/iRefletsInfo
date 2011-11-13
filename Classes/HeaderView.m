@@ -30,6 +30,7 @@
 //
 
 #import "HeaderView.h"
+#import "Constants.h"
 
 @implementation HeaderView
 
@@ -40,17 +41,58 @@
 }
 
 -(void) setWallTitleText:(NSString *)wallTitle {
-	UIImageView* userImageView = [[UIImageView alloc] init];
-	userImageView.image = [UIImage imageNamed:@"logo-reflets-header.jpg"];
-	[userImageView setFrame:CGRectMake(10, 1, 190, 48)];
-	[self addSubview:userImageView];
-	[userImageView release];
-	
-	
+    
+    UIToolbar *toolbar = [UIToolbar new];
+    toolbar.barStyle = UIBarStyleDefault;
+    [toolbar sizeToFit];		
+    toolbar.autoresizingMask = toolbar.autoresizingMask | UIViewAutoresizingFlexibleWidth;
+    
+    UIImage *buttonImage = [UIImage imageNamed:@"logo-reflets-button.png"];
+    UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [imageButton setImage:buttonImage forState:UIControlStateNormal];
+    imageButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+    UIBarButtonItem *imageButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];    
+    
+    UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                 target:self
+                                                                                 action:@selector(actionRefresh:)];
+    
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                              target:nil
+                                                                              action:nil];
+    
+    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, flexItem, refreshButtonItem, nil];
+    
+    //release buttons
+    [imageButton release];
+    [imageButtonItem release];
+    [refreshButtonItem release];
+    [flexItem release];
+    
+    //add array of buttons to toolbar
+    [toolbar setItems:items animated:NO];
+    [self addSubview:toolbar]; 
 }
 
 -(void) dealloc {
+    [activityIndicator release];
 	[super dealloc];
+}
+
+-(void) startedActivity:(NSNotification *) notification
+{
+    [activityIndicator startAnimating];
+}
+
+-(void) stoppedActivity:(NSNotification *) notification
+{
+    [activityIndicator stopAnimating];
+}
+
+- (IBAction)actionRefresh:(id)sender 
+{
+    NSLog(@"Refresh");
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshFeeds object:nil];
 }
 
 @end

@@ -33,6 +33,7 @@
 
 @interface HeaderView : UIView {
 	UIInterfaceOrientation currrentInterfaceOrientation;
+    UIActivityIndicatorView *activityIndicator;
 }
 @property (nonatomic,readonly) UIInterfaceOrientation currrentInterfaceOrientation;
 @property (nonatomic,retain) NSString* wallTitleText;
