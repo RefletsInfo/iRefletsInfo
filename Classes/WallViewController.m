@@ -89,8 +89,10 @@
 - (void) addFlipperView
 {
     if (flipper) {
+        flipper.currentPage = 1;
         [flipper removeFromSuperview];
         [flipper release];
+        flipper = nil;
     }
     flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
     flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

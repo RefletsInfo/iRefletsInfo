@@ -124,6 +124,7 @@
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:path];
     NSString *contentWithCSS = [[NSString alloc] initWithFormat:@"<link rel='stylesheet' href='style.css' type='text/css' media='screen' />%@", messageModel.content];
+    webView.delegate = nil;
     [webView loadHTMLString:contentWithCSS baseURL:baseURL];
     [contentWithCSS release];
     [webView sizeToFit];
