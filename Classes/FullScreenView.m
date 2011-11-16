@@ -44,10 +44,16 @@
 		contentView = [[UIView alloc] init];
 		[contentView setBackgroundColor:RGBCOLOR(255,255,255)];
 		
-		userImageView = [[UIImageView alloc] init];
+		
+        userImageView = [[UIImageView alloc] init];
 		[userImageView setBackgroundColor:[UIColor clearColor]];
 		[userImageView setFrame:CGRectMake(10, 10, 130, 130)];
-		[userImageView setImage:[UIImage imageNamed:@"missing-people.png"]];
+        if (messageModel.userImage) {
+            NSURL *url = [NSURL URLWithString:messageModel.userImage];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [UIImage imageWithData:data];
+            userImageView.image = image;
+        }
 		[contentView addSubview:userImageView];
 		
 		userNameLabel = [[UILabel alloc] init];
@@ -122,10 +128,6 @@
     [contentWithCSS release];
     [webView sizeToFit];
     [webView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, contentViewArea.width-20, contentViewArea.height - (userImageView.frame.origin.y + userImageView.frame.size.height + 10))];
-//    [webView setFrame:CGRectMake(0, 0, scrollView.frame.size.width,webView.frame.size.height)];
-//
-//    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, webView.frame.origin.y + webView.frame.size.height)];
-	
 }
 
 

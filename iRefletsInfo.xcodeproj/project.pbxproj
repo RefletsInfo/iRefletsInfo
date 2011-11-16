@@ -38,6 +38,9 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		B1287CDD1473797C004E2F9C /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B1287CD91473797C004E2F9C /* HTMLNode.m */; };
+		B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B1287CDB1473797C004E2F9C /* HTMLParser.m */; };
+		B1287CE1147379C2004E2F9C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B1287CE0147379C2004E2F9C /* libxml2.dylib */; };
 		B12AA0DB147034F6004DE401 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = B12AA0DA147034F6004DE401 /* style.css */; };
 		B152A122146FC19100F3E0D0 /* logo-reflets.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A121146FC19100F3E0D0 /* logo-reflets.jpg */; };
 		B152A124146FC22700F3E0D0 /* logo-reflets-header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */; };
@@ -109,6 +112,11 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iRefletsInfo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRefletsInfo_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iRefletsInfo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iRefletsInfo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		B1287CD81473797C004E2F9C /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
+		B1287CD91473797C004E2F9C /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
+		B1287CDA1473797C004E2F9C /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		B1287CDB1473797C004E2F9C /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		B1287CE0147379C2004E2F9C /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		B12AA0DA147034F6004DE401 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		B152A121146FC19100F3E0D0 /* logo-reflets.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets.jpg"; sourceTree = "<group>"; };
 		B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets-header.jpg"; sourceTree = "<group>"; };
@@ -141,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1287CE1147379C2004E2F9C /* libxml2.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -154,6 +163,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B1287CD71473797C004E2F9C /* HTML-Parser */,
 				B15AA765146D6F9D00131196 /* MBProgressHud */,
 				B17AF589142623C8004B50AF /* MWFeedParser */,
 				1873AC5613D1753F001A999B /* Model */,
@@ -257,6 +267,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B1287CE0147379C2004E2F9C /* libxml2.dylib */,
 				B152A129146FC8F300F3E0D0 /* icon-app-ipad.png */,
 				B152A127146FC8B800F3E0D0 /* Default-Landscape~ipad.png */,
 				B152A125146FC8B300F3E0D0 /* Default-Portrait~ipad.png */,
@@ -307,6 +318,17 @@
 				1873AB2413D17044001A999B /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B1287CD71473797C004E2F9C /* HTML-Parser */ = {
+			isa = PBXGroup;
+			children = (
+				B1287CD81473797C004E2F9C /* HTMLNode.h */,
+				B1287CD91473797C004E2F9C /* HTMLNode.m */,
+				B1287CDA1473797C004E2F9C /* HTMLParser.h */,
+				B1287CDB1473797C004E2F9C /* HTMLParser.m */,
+			);
+			path = "HTML-Parser";
 			sourceTree = "<group>";
 		};
 		B15AA765146D6F9D00131196 /* MBProgressHud */ = {
@@ -444,6 +466,8 @@
 				B17AF5A1142623E6004B50AF /* NSString+HTML.m in Sources */,
 				B17AF5A2142623E6004B50AF /* NSString+XMLEntities.m in Sources */,
 				B15AA769146D6FB000131196 /* MBProgressHUD.m in Sources */,
+				B1287CDD1473797C004E2F9C /* HTMLNode.m in Sources */,
+				B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +477,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -461,18 +485,20 @@
 				GCC_PREFIX_HEADER = iRefletsInfo_Prefix.pch;
 				INFOPLIST_FILE = "iRefletsInfo-Info.plist";
 				PRODUCT_NAME = iRefletsInfo;
+				USER_HEADER_SEARCH_PATHS = /usr/include/libxml2;
 			};
 			name = Debug;
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iRefletsInfo_Prefix.pch;
 				INFOPLIST_FILE = "iRefletsInfo-Info.plist";
 				PRODUCT_NAME = iRefletsInfo;
+				USER_HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

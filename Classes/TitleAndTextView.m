@@ -80,7 +80,12 @@
 	contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
 	userImageView = [[UIImageView alloc] init];
-	userImageView.image = [UIImage imageNamed:messageModel.userImage];
+    if (messageModel.userImage) {
+        NSURL *url = [NSURL URLWithString:messageModel.userImage];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *image = [UIImage imageWithData:data];
+        userImageView.image = image;
+    }
 	[userImageView setFrame:CGRectMake(10, 10, 50, 50)];
 	[contentView addSubview:userImageView];
 

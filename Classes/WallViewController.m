@@ -51,6 +51,8 @@
 #import "MBProgressHUD.h"
 #import "Constants.h"
 
+#import "HTMLParser.h"
+
 @implementation WallViewController
 @synthesize viewControlerStack,gestureRecognizer,wallTitle;
 
@@ -144,9 +146,7 @@
     if (!data) {
         return NO;
     }
-    NSLog(@"data = %@", data);
     NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    NSLog(@"collection = %@", array);
     [data release];
     
     if (messageArrayCollection) {
@@ -528,6 +528,23 @@
     messageModel1.link = item.link;
     messageModel1.content = item.content;
     messageModel1.summary = [item.summary stringByConvertingHTMLToPlainText];
+    
+    NSError *error = nil;
+    HTMLParser *htmlParser = [[HTMLParser alloc] initWithString:item.content error:&error];
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }  
+    else {
+        HTMLNode * bodyNode = [htmlParser body];
+        NSArray * imageNodes = [bodyNode findChildTags:@"img"];
+        for (HTMLNode * imageNode in imageNodes) { //Loop through all the tags
+            NSLog(@"Found image with src: %@", [imageNode getAttributeNamed:@"src"]);
+            messageModel1.userImage = [imageNode getAttributeNamed:@"src"];
+            break;
+        }        
+    }
+    [htmlParser release];
+    
     [tempMessageArrayCollection addObject:messageModel1];
     [messageModel1 release];
     [formatter release];
