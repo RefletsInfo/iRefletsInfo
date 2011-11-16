@@ -80,11 +80,14 @@
 	contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
 	userImageView = [[UIImageView alloc] init];
+    [userImageView setImage:[UIImage imageNamed:@"missing-people.png"]];
     if (messageModel.userImage) {
-        NSURL *url = [NSURL URLWithString:messageModel.userImage];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        UIImage *image = [UIImage imageWithData:data];
-        userImageView.image = image;
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{       
+            NSURL *url = [NSURL URLWithString:messageModel.userImage];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [UIImage imageWithData:data];
+            userImageView.image = image;
+        });
     }
 	[userImageView setFrame:CGRectMake(10, 10, 50, 50)];
 	[contentView addSubview:userImageView];
