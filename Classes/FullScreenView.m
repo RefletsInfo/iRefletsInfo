@@ -47,12 +47,15 @@
 		
         userImageView = [[UIImageView alloc] init];
 		[userImageView setBackgroundColor:[UIColor clearColor]];
+        [userImageView setImage:[UIImage imageNamed:@"missing-people.png"]];
 		[userImageView setFrame:CGRectMake(10, 10, 130, 130)];
         if (messageModel.userImage) {
-            NSURL *url = [NSURL URLWithString:messageModel.userImage];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            UIImage *image = [UIImage imageWithData:data];
-            userImageView.image = image;
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{       
+                NSURL *url = [NSURL URLWithString:messageModel.userImage];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                UIImage *image = [UIImage imageWithData:data];
+                userImageView.image = image;
+            });
         }
 		[contentView addSubview:userImageView];
 		
