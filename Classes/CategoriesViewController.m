@@ -110,18 +110,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here -- for example, create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     NSManagedObject *selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-    NSDictionary *category = [self.categories objectAtIndex:indexPath.row];
-    NSString *urlString = [category objectForKey:@"url"];
-    //detailViewController.detailItem = urlString;
     if (parent) {
         [parent dismissPopoverAnimated:YES];
         [parent.delegate popoverControllerDidDismissPopover:parent];
@@ -153,13 +141,16 @@
 }
 
 
-- (NSString *)getSelectedURL
+- (NSDictionary *)getSelectedItem
 {
     NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    if (!path) {
+        return nil;
+    }
+    
     NSUInteger row = [path row];
     NSDictionary *dict = [self.categories objectAtIndex:row];
-    NSString *url = [dict objectForKey:@"url"];
-    return url;
+    return dict;
 }
 
 

@@ -49,11 +49,12 @@
 
 #import "MessageModel.h"
 #import "MBProgressHUD.h"
+#import "CacheManager.h"
 #import "Constants.h"
 
 
 @implementation WallViewController
-@synthesize viewControlerStack,gestureRecognizer,wallTitle;
+@synthesize viewControlerStack,gestureRecognizer,wallTitle, currentItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
    
@@ -61,8 +62,13 @@
 		[self.view setBackgroundColor:[UIColor whiteColor]];
 		isInFullScreenMode = FALSE;
 
+        self.currentItem = [[NSDictionary alloc] initWithObjectsAndKeys:kFeedsURL, @"url", kFeedsSlug, @"slug", @"Accueil", @"name", nil];
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFeeds:) name:kNotificationRefreshFeeds object:nil];    
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCategory:) name:kNotificationChangeCategory object:nil];    
+        
+
         if (![self loadCache]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
             [self loadFeeds:kFeedsURL];
@@ -72,20 +78,38 @@
     return self;
 }
 
+-(void) changeCategory:(NSNotification *) notification
+{
+    UIView *view = [self.view viewWithTag:42];
+    if (!view) {
+        view = self.view;
+    }
+    NSDictionary *dict = (NSDictionary *)notification.object;
+    if (self.currentItem) {
+        [self.currentItem release];
+        self.currentItem = nil;
+    }
+    if (dict) {
+        self.currentItem = dict;
+    }    
+    if (![self loadCache]) {
+        [MBProgressHUD showHUDAddedTo:view animated:TRUE];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{       
+            [self loadFeeds:[self.currentItem objectForKey:@"url"]];
+            [MBProgressHUD hideHUDForView:view animated:TRUE];
+        });
+    };
+}
+
 -(void) refreshFeeds:(NSNotification *) notification
 {
     UIView *view = [self.view viewWithTag:42];
     if (!view) {
         view = self.view;
     }
-    NSString *url = (NSString *)notification.object;
-    if (!url) {
-        url = kFeedsURL;
-    }
-    
     [MBProgressHUD showHUDAddedTo:view animated:TRUE];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{       
-        [self loadFeeds:url];
+        [self loadFeeds:[self.currentItem objectForKey:@"url"]];
         [MBProgressHUD hideHUDForView:view animated:TRUE];
     });
 }
@@ -132,35 +156,22 @@
 
 - (void)saveCache
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"feeds.data"];
-    NSLog(@"saving data to %@", filePath);
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:messageArrayCollection];
-    BOOL res = [data writeToFile:filePath atomically:TRUE];
-    if (!res) {
-        NSLog(@"Error");
-    }
+    CacheManager *cacheManager = [CacheManager sharedCacheManager];
+    [cacheManager saveCache:messageArrayCollection slug:[self.currentItem objectForKey:@"slug"]];
 }
 
 - (BOOL) loadCache
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"feeds.data"];
-    
-    NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
-    if (!data) {
+    CacheManager *cacheManager = [CacheManager sharedCacheManager];
+    NSArray *array = [cacheManager loadCache:[self.currentItem objectForKey:@"slug"]];
+    if (!array) {
         return NO;
     }
-    NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    [data release];
-    
     if (messageArrayCollection) {
         [messageArrayCollection release];
     }
     messageArrayCollection = [[NSMutableArray alloc] initWithArray:array];
-
+//    [array release];
     [self buildPages:messageArrayCollection];
     [self addFlipperView];
     return YES;
@@ -283,7 +294,7 @@
             
             HeaderView* headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, layoutToReturn.frame.size.width, 50)];
             headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-            [headerView setWallTitleText:@"reflets.info"];
+            [headerView setWallTitleText:[self.currentItem objectForKey:@"name"]];
             [headerView setBackgroundColor:[UIColor whiteColor]];
             [headerView rotate:self.interfaceOrientation animation:NO];
             [layoutToReturn setHeaderView:headerView];
@@ -509,6 +520,8 @@
 	}
 	[wallTitle release];
     [toolbar release];
+    
+    [currentItem release];
     [super dealloc];
 }
 

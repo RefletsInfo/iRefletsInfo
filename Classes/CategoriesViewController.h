@@ -16,6 +16,6 @@
 @property (nonatomic, retain) NSArray *categories;
 @property (nonatomic, retain) UIPopoverController *parent;
 
-- (NSString *)getSelectedURL;
+- (NSDictionary *)getSelectedItem;
 
 @end

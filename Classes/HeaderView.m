@@ -54,7 +54,8 @@
     imageButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
     UIBarButtonItem *imageButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];
     
-    UIBarButtonItem *categoriesButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(actionChooseCategory:)];
+    UIBarButtonItem *categoriesButtonItem = [[UIBarButtonItem alloc] initWithTitle:wallTitle style:UIBarButtonItemStylePlain target:self action:@selector(actionChooseCategory:)];
+    categoriesButtonItem.tag = 101;
     
     UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(actionRefresh:)];
     
@@ -108,10 +109,9 @@
     CategoriesViewController *content = (CategoriesViewController *) popoverController.contentViewController;
     [popoverController release];
     
-    NSString *url = [content getSelectedURL];
-    NSLog(@"selected url = %@", url);
-    if (url) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshFeeds object:url];
+    NSDictionary *dict = [content getSelectedItem];
+    if (dict) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChangeCategory object:dict];
     }
 }
 

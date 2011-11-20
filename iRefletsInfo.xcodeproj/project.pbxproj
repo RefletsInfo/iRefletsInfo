@@ -44,6 +44,7 @@
 		B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B1287CDB1473797C004E2F9C /* HTMLParser.m */; };
 		B1287CE1147379C2004E2F9C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B1287CE0147379C2004E2F9C /* libxml2.dylib */; };
 		B12AA0DB147034F6004DE401 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = B12AA0DA147034F6004DE401 /* style.css */; };
+		B144F6FA1478E66C00F1D83B /* CacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B144F6F91478E66C00F1D83B /* CacheManager.m */; };
 		B152A122146FC19100F3E0D0 /* logo-reflets.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A121146FC19100F3E0D0 /* logo-reflets.jpg */; };
 		B152A124146FC22700F3E0D0 /* logo-reflets-header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */; };
 		B152A126146FC8B300F3E0D0 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B152A125146FC8B300F3E0D0 /* Default-Portrait~ipad.png */; };
@@ -123,6 +124,8 @@
 		B1287CDB1473797C004E2F9C /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
 		B1287CE0147379C2004E2F9C /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		B12AA0DA147034F6004DE401 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		B144F6F81478E66C00F1D83B /* CacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheManager.h; sourceTree = "<group>"; };
+		B144F6F91478E66C00F1D83B /* CacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheManager.m; sourceTree = "<group>"; };
 		B152A121146FC19100F3E0D0 /* logo-reflets.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets.jpg"; sourceTree = "<group>"; };
 		B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets-header.jpg"; sourceTree = "<group>"; };
 		B152A125146FC8B300F3E0D0 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 			children = (
 				1873AC5713D17550001A999B /* MessageModel.h */,
 				1873AC5813D17550001A999B /* MessageModel.m */,
+				B144F6F81478E66C00F1D83B /* CacheManager.h */,
+				B144F6F91478E66C00F1D83B /* CacheManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				B1287CDD1473797C004E2F9C /* HTMLNode.m in Sources */,
 				B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */,
 				B1242A3C1478B729003A8BE2 /* CategoriesViewController.m in Sources */,
+				B144F6FA1478E66C00F1D83B /* CacheManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

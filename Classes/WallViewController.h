@@ -48,6 +48,8 @@
 	NSMutableArray* tempMessageArrayCollection;
     MWFeedParser *feedParser;
     UIToolbar *toolbar;
+    
+    NSDictionary *currentItem;
 }
 
 -(void)showViewInFullScreen:(UIViewExtention*)viewToShow withModel:(MessageModel*)model;
@@ -60,5 +62,5 @@
 @property (nonatomic, assign) NSMutableArray* viewControlerStack;
 @property (nonatomic, assign) UIGestureRecognizer* gestureRecognizer;
 @property (nonatomic, retain) NSString* wallTitle;
-
+@property (nonatomic, retain) NSDictionary *currentItem;
 @end
