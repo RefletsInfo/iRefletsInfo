@@ -37,7 +37,6 @@
 	MessageModel* messageModel;
 	UIView* contentView;
 
-	UIImageView* userImageView;
 	UILabel* userNameLabel;
 	UILabel* timeStampLabel;
     UIWebView* webView;
@@ -45,8 +44,6 @@
 	UIViewExtention* viewToOverLap;
 	UIView* fullScreenBG;
 	UIButton* closeButton;
-	
-	UIScrollView* scrollView;
 }
 
 -(id)initWithModel:(MessageModel*)model;

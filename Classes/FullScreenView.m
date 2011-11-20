@@ -45,26 +45,13 @@
 		[contentView setBackgroundColor:RGBCOLOR(255,255,255)];
 		
 		
-        userImageView = [[UIImageView alloc] init];
-		[userImageView setBackgroundColor:[UIColor clearColor]];
-        [userImageView setImage:[UIImage imageNamed:@"missing-people.png"]];
-		[userImageView setFrame:CGRectMake(10, 10, 130, 130)];
-        if (messageModel.userImage) {
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{       
-                NSURL *url = [NSURL URLWithString:messageModel.userImage];
-                NSData *data = [NSData dataWithContentsOfURL:url];
-                UIImage *image = [UIImage imageWithData:data];
-                userImageView.image = image;
-            });
-        }
-		[contentView addSubview:userImageView];
 		
 		userNameLabel = [[UILabel alloc] init];
 		userNameLabel.font =[UIFont fontWithName:@"Arial-BoldMT" size:30];
 		[userNameLabel setTextColor:RGBCOLOR(0,0,0)];
 		[userNameLabel setBackgroundColor:[UIColor clearColor]];
 		[userNameLabel setText:[NSString stringWithFormat:@"%@",messageModel.userName]];
-		[userNameLabel setFrame:CGRectMake(userImageView.frame.origin.x + userImageView.frame.size.width + 10, 5, 0, 0)];
+		[userNameLabel setFrame:CGRectMake(10, 5, 0, 0)];
 		userNameLabel.adjustsFontSizeToFitWidth = NO;
         userNameLabel.numberOfLines = 0;
         
@@ -78,15 +65,11 @@
 		timeStampLabel.alpha = 0;
 		[contentView addSubview:timeStampLabel];
 		
-		scrollView = [[UIScrollView alloc] init];
-		[scrollView setBackgroundColor:[UIColor clearColor]];
-		[scrollView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, 0, 0)];
-//		[contentView addSubview:scrollView];
 		
         webView = [[UIWebView alloc] init];
         webView.alpha = 1;
         [webView setBackgroundColor:[UIColor clearColor]];
-		[webView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, 0, 0)];
+		[webView setFrame:CGRectMake(10, userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 10, 0, 0)];
         [contentView addSubview:webView];
 		
 		closeButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
@@ -114,14 +97,12 @@
     //[userImageView setFrame:CGRectMake(10, 10, 130, 130)];
 
     [userNameLabel sizeToFit];
-    [userNameLabel setFrame:CGRectMake(userImageView.frame.origin.x + userImageView.frame.size.width + 10, 5, (contentViewArea.width - (userImageView.frame.size.width + 10)) - 30, userNameLabel.frame.size.height)];
+    [userNameLabel setFrame:CGRectMake(10, 5, contentViewArea.width - 40, userNameLabel.frame.size.height)];
 
     [timeStampLabel sizeToFit];
     [timeStampLabel setFrame:CGRectMake(userNameLabel.frame.origin.x, userNameLabel.frame.origin.y + userNameLabel.frame.size.height, timeStampLabel.frame.size.width, timeStampLabel.frame.size.height)];
 
     [closeButton setFrame:CGRectMake(contentViewArea.width - 30, 0, 30, 30)];
-
-    [scrollView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, contentViewArea.width-20, contentViewArea.height - (userImageView.frame.origin.y + userImageView.frame.size.height + 10))];
 
     ///////////////////////////////////////////////////////////////
     NSString *path = [[NSBundle mainBundle] bundlePath];
@@ -131,7 +112,7 @@
     [webView loadHTMLString:contentWithCSS baseURL:baseURL];
     [contentWithCSS release];
     [webView sizeToFit];
-    [webView setFrame:CGRectMake(10, userImageView.frame.origin.y + userImageView.frame.size.height + 10, contentViewArea.width-20, contentViewArea.height - (userImageView.frame.origin.y + userImageView.frame.size.height + 10))];
+    [webView setFrame:CGRectMake(10, userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 20, contentViewArea.width-20, contentViewArea.height - (userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 20))];
 }
 
 
@@ -178,14 +159,10 @@
     webView=nil;
 	[closeButton release];
 	closeButton=nil;
-	[userImageView release];
-	userImageView=nil;
 	[userNameLabel release];
 	userNameLabel=nil;
 	[timeStampLabel release];
 	timeStampLabel=nil;
-	[scrollView release];
-	scrollView=nil;
 	[contentView release];
 	contentView=nil;
 	[super dealloc];
