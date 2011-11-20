@@ -35,14 +35,13 @@
 
 @implementation HeaderView
 
-@synthesize currrentInterfaceOrientation,wallTitleText;
+@synthesize currrentInterfaceOrientation,wallTitleText, currentItem;
 
 -(void)rotate:(UIInterfaceOrientation)interfaceOrientation animation:(BOOL)animation{
 	currrentInterfaceOrientation = interfaceOrientation;
 }
 
 -(void) setWallTitleText:(NSString *)wallTitle {
-    
     UIToolbar *toolbar = [UIToolbar new];
     toolbar.barStyle = UIBarStyleDefault;
     [toolbar sizeToFit];		
@@ -54,14 +53,14 @@
     imageButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
     UIBarButtonItem *imageButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];
     
-    UIBarButtonItem *categoriesButtonItem = [[UIBarButtonItem alloc] initWithTitle:wallTitle style:UIBarButtonItemStylePlain target:self action:@selector(actionChooseCategory:)];
+    UIBarButtonItem *categoriesButtonItem = [[UIBarButtonItem alloc] initWithTitle:wallTitle style:UIBarButtonItemStyleBordered target:self action:@selector(actionChooseCategory:)];
     categoriesButtonItem.tag = 101;
     
     UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(actionRefresh:)];
     
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, categoriesButtonItem, flexItem, refreshButtonItem, nil];
+    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, flexItem, categoriesButtonItem,refreshButtonItem, nil];
     
     //release buttons
     [imageButton release];
@@ -92,16 +91,23 @@
 
 - (IBAction)actionChooseCategory:(id)sender 
 {
-    CategoriesViewController *content = [[CategoriesViewController alloc] init];
-    UIPopoverController *popoverController = [[UIPopoverController alloc] 
-                                              initWithContentViewController:content];
-    popoverController.delegate = self;
-    popoverController.popoverContentSize = CGSizeMake(320, 200);
-    content.parent = popoverController;
-    [popoverController presentPopoverFromBarButtonItem:sender
-                     permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
-    [content release];
+    if (catPopoverController) {
+        [catPopoverController dismissPopoverAnimated:YES];
+        [catPopoverController.delegate popoverControllerDidDismissPopover:catPopoverController];
+        catPopoverController=nil;
+    } else {
+        CategoriesViewController *content = [[CategoriesViewController alloc] init];
+        UIPopoverController *popoverController = [[UIPopoverController alloc] 
+                                                  initWithContentViewController:content];
+        popoverController.delegate = self;
+        popoverController.popoverContentSize = CGSizeMake(320, 400);
+        content.parent = popoverController;
+        content.currentItem = self.currentItem;
+        [popoverController presentPopoverFromBarButtonItem:sender
+                         permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        catPopoverController = popoverController;
+        [content release];
+    }
 }
 
 -(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
@@ -113,6 +119,7 @@
     if (dict) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChangeCategory object:dict];
     }
+    
 }
 
 

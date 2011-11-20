@@ -10,11 +10,13 @@
 
 @interface CategoriesViewController : UITableViewController {
     NSArray *categories;
+    NSDictionary *currentItem;
     UIPopoverController *parent;
 }
 
 @property (nonatomic, retain) NSArray *categories;
 @property (nonatomic, retain) UIPopoverController *parent;
+@property (nonatomic, retain) NSDictionary *currentItem;
 
 - (NSDictionary *)getSelectedItem;
 

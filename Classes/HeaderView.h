@@ -34,9 +34,12 @@
 @interface HeaderView : UIView <UIPopoverControllerDelegate>{
 	UIInterfaceOrientation currrentInterfaceOrientation;
     UIActivityIndicatorView *activityIndicator;
+    UIPopoverController *catPopoverController;
+    NSDictionary *currentItem;
 }
 @property (nonatomic,readonly) UIInterfaceOrientation currrentInterfaceOrientation;
 @property (nonatomic,retain) NSString* wallTitleText;
+@property (nonatomic,retain) NSDictionary *currentItem;
 -(void)rotate:(UIInterfaceOrientation)interfaceOrientation animation:(BOOL)animation;
 
 @end

@@ -12,6 +12,7 @@
 
 @synthesize categories;
 @synthesize parent;
+@synthesize currentItem;
 
 - (void)viewDidLoad
 {
@@ -74,6 +75,15 @@
     // Configure the cell.
     NSDictionary *category = [self.categories objectAtIndex:indexPath.row];
     cell.textLabel.text = [category objectForKey:@"name"];
+    
+    if (self.currentItem) {
+        NSString *slug = [category objectForKey:@"slug"];
+        NSString *selectedSlug = [self.currentItem objectForKey:@"slug"];
+        
+        if ([slug isEqualToString:selectedSlug]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    }
     return cell;
 }
 

@@ -294,6 +294,7 @@
             
             HeaderView* headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, layoutToReturn.frame.size.width, 50)];
             headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            headerView.currentItem = self.currentItem;
             [headerView setWallTitleText:[self.currentItem objectForKey:@"name"]];
             [headerView setBackgroundColor:[UIColor whiteColor]];
             [headerView rotate:self.interfaceOrientation animation:NO];
