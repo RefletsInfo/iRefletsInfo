@@ -38,6 +38,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		B1242A3C1478B729003A8BE2 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1242A3B1478B729003A8BE2 /* CategoriesViewController.m */; };
+		B1242A3F1478B818003A8BE2 /* Categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1242A3E1478B818003A8BE2 /* Categories.plist */; };
 		B1287CDD1473797C004E2F9C /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B1287CD91473797C004E2F9C /* HTMLNode.m */; };
 		B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B1287CDB1473797C004E2F9C /* HTMLParser.m */; };
 		B1287CE1147379C2004E2F9C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B1287CE0147379C2004E2F9C /* libxml2.dylib */; };
@@ -112,6 +114,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* iRefletsInfo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRefletsInfo_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iRefletsInfo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iRefletsInfo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		B1242A3A1478B729003A8BE2 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		B1242A3B1478B729003A8BE2 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		B1242A3E1478B818003A8BE2 /* Categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Categories.plist; sourceTree = "<group>"; };
 		B1287CD81473797C004E2F9C /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
 		B1287CD91473797C004E2F9C /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
 		B1287CDA1473797C004E2F9C /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
@@ -183,6 +188,8 @@
 			children = (
 				180E006513D19F83005DF14C /* WallViewController.h */,
 				180E006613D19F83005DF14C /* WallViewController.m */,
+				B1242A3A1478B729003A8BE2 /* CategoriesViewController.h */,
+				B1242A3B1478B729003A8BE2 /* CategoriesViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 				1873ABE413D17378001A999B /* flip-illusion.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* iRefletsInfo-Info.plist */,
+				B1242A3E1478B818003A8BE2 /* Categories.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -429,6 +437,7 @@
 				B152A12A146FC8F300F3E0D0 /* icon-app-ipad.png in Resources */,
 				B18C6DA7146FF8E0004AB620 /* logo-reflets-button.png in Resources */,
 				B12AA0DB147034F6004DE401 /* style.css in Resources */,
+				B1242A3F1478B818003A8BE2 /* Categories.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +477,7 @@
 				B15AA769146D6FB000131196 /* MBProgressHUD.m in Sources */,
 				B1287CDD1473797C004E2F9C /* HTMLNode.m in Sources */,
 				B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */,
+				B1242A3C1478B729003A8BE2 /* CategoriesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
