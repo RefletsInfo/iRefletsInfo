@@ -106,11 +106,13 @@
 -(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     CategoriesViewController *content = (CategoriesViewController *) popoverController.contentViewController;
+    [popoverController release];
     
     NSString *url = [content getSelectedURL];
     NSLog(@"selected url = %@", url);
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshFeeds object:url];
-    [popoverController release];
+    if (url) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshFeeds object:url];
+    }
 }
 
 

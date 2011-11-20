@@ -42,6 +42,7 @@
 }
 
 -(id)initWithMessageObject:(NSDictionary*)messageObject;
+-(void)findImage;
 
 @property (nonatomic,assign) NSInteger messageID;
 @property (nonatomic,retain) NSString* summary;

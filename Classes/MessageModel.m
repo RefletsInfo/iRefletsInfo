@@ -30,6 +30,8 @@
 //
 
 #import "MessageModel.h"
+#import "HTMLParser.h"
+
 #define kMessageIDKey      @"id"
 #define kContentKey        @"content"
 #define kSummaryKey        @"summary"
@@ -103,6 +105,26 @@
     id res = [self initWithMessageObject:dict];
     [dict release];
     return res;
+}
+
+-(void)findImage
+{
+    NSError *error = nil;
+    HTMLParser *htmlParser = [[HTMLParser alloc] initWithString:self.content error:&error];
+    if (error) {
+        NSLog(@"Error parsing %@ : %@", self.userName, error);
+    }  
+    else {
+        NSLog(@"Parsed successfully %@", self.userName);
+        
+        HTMLNode * bodyNode = [htmlParser body];
+        HTMLNode *imageNode = [bodyNode findChildTag:@"img"];
+        if (imageNode) { 
+            NSLog(@"Found image with src: %@", [imageNode getAttributeNamed:@"src"]);
+            self.userImage = [imageNode getAttributeNamed:@"src"];
+        }        
+    }
+    [htmlParser release];
 }
 
 @end

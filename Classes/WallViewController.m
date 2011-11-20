@@ -51,7 +51,6 @@
 #import "MBProgressHUD.h"
 #import "Constants.h"
 
-#import "HTMLParser.h"
 
 @implementation WallViewController
 @synthesize viewControlerStack,gestureRecognizer,wallTitle;
@@ -131,7 +130,7 @@
     [self addFlipperView];
 }
 
-- (void)saveCache 
+- (void)saveCache
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -173,6 +172,7 @@
 
 
 -(void)buildPages:(NSArray*)messageArray {
+    [messageArray makeObjectsPerformSelector:@selector(findImage)];
 	self.view.autoresizesSubviews = YES;
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     if (viewControlerStack) {
@@ -537,25 +537,15 @@
     messageModel1.content = item.content;
     messageModel1.summary = [item.summary stringByConvertingHTMLToPlainText];
     
-    NSError *error = nil;
-    HTMLParser *htmlParser = [[HTMLParser alloc] initWithString:item.content error:&error];
-    if (error) {
-        NSLog(@"Error: %@", error);
-    }  
-    else {
-        HTMLNode * bodyNode = [htmlParser body];
-        NSArray * imageNodes = [bodyNode findChildTags:@"img"];
-        for (HTMLNode * imageNode in imageNodes) { //Loop through all the tags
-            NSLog(@"Found image with src: %@", [imageNode getAttributeNamed:@"src"]);
-            messageModel1.userImage = [imageNode getAttributeNamed:@"src"];
-            break;
-        }        
-    }
-    [htmlParser release];
     
     [tempMessageArrayCollection addObject:messageModel1];
     [messageModel1 release];
     [formatter release];
+}
+
+- (void) findImages:(NSArray *) elements
+{
+    [elements makeObjectsPerformSelector:@selector(findImage)];
 }
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser
@@ -573,6 +563,17 @@
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error
 {
     NSLog(@"Hi, error : %@", error);
+    if (tempMessageArrayCollection.count == 0) {
+        return;
+    }
+    [self closeFullScreen];
+    
+    if (messageArrayCollection) {
+        [messageArrayCollection release];
+    }
+    messageArrayCollection = [[NSMutableArray alloc] initWithArray:tempMessageArrayCollection];
+    [self saveCache];
+    [self buildPages:messageArrayCollection];
 }
 
 @end
