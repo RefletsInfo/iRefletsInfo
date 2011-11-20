@@ -79,9 +79,14 @@
     if (!view) {
         view = self.view;
     }
+    NSString *url = (NSString *)notification.object;
+    if (!url) {
+        url = kFeedsURL;
+    }
+    
     [MBProgressHUD showHUDAddedTo:view animated:TRUE];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{       
-        [self loadFeeds:kFeedsURL];
+        [self loadFeeds:url];
         [MBProgressHUD hideHUDForView:view animated:TRUE];
     });
 }
@@ -102,6 +107,7 @@
 }
 - (void)loadFeeds:(NSString*)url
 {
+    NSLog(@"Loading feeds at %@", url);
     if (tempMessageArrayCollection) {
         [tempMessageArrayCollection release];
     }
@@ -566,8 +572,7 @@
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error
 {
-    NSLog(@"Hi, error");
-    //[self buildPages:messageArrayCollection];
+    NSLog(@"Hi, error : %@", error);
 }
 
 @end

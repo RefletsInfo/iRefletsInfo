@@ -31,6 +31,7 @@
 
 #import "HeaderView.h"
 #import "Constants.h"
+#import "CategoriesViewController.h"
 
 @implementation HeaderView
 
@@ -51,21 +52,20 @@
     UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [imageButton setImage:buttonImage forState:UIControlStateNormal];
     imageButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    UIBarButtonItem *imageButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];    
+    UIBarButtonItem *imageButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];
     
-    UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                                 target:self
-                                                                                 action:@selector(actionRefresh:)];
+    UIBarButtonItem *categoriesButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(actionChooseCategory:)];
     
-    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                              target:nil
-                                                                              action:nil];
+    UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(actionRefresh:)];
     
-    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, flexItem, refreshButtonItem, nil];
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, categoriesButtonItem, flexItem, refreshButtonItem, nil];
     
     //release buttons
     [imageButton release];
     [imageButtonItem release];
+    [categoriesButtonItem release];
     [refreshButtonItem release];
     [flexItem release];
     
@@ -88,6 +88,31 @@
 {
     [activityIndicator stopAnimating];
 }
+
+- (IBAction)actionChooseCategory:(id)sender 
+{
+    CategoriesViewController *content = [[CategoriesViewController alloc] init];
+    UIPopoverController *popoverController = [[UIPopoverController alloc] 
+                                              initWithContentViewController:content];
+    popoverController.delegate = self;
+    popoverController.popoverContentSize = CGSizeMake(320, 200);
+    content.parent = popoverController;
+    [popoverController presentPopoverFromBarButtonItem:sender
+                     permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+    [content release];
+}
+
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    CategoriesViewController *content = (CategoriesViewController *) popoverController.contentViewController;
+    
+    NSString *url = [content getSelectedURL];
+    NSLog(@"selected url = %@", url);
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshFeeds object:url];
+    [popoverController release];
+}
+
 
 - (IBAction)actionRefresh:(id)sender 
 {

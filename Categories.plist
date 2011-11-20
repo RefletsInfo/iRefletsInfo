@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>categories</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Ecole VLM</string>
+			<key>url</key>
+			<string>http://ecoles-vlm.fr/feed/</string>
+		</dict>
+		<dict>
+			<key>url</key>
+			<string>http://reflets.info/feed/</string>
+			<key>name</key>
+			<string>Accueil</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Economie</string>
+			<key>url</key>
+			<string>http://reflets.info/category/economie/feed/</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -31,7 +31,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HeaderView : UIView {
+@interface HeaderView : UIView <UIPopoverControllerDelegate>{
 	UIInterfaceOrientation currrentInterfaceOrientation;
     UIActivityIndicatorView *activityIndicator;
 }
