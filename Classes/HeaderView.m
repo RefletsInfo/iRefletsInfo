@@ -43,7 +43,7 @@
 
 -(void) setWallTitleText:(NSString *)wallTitle {
     UIToolbar *toolbar = [UIToolbar new];
-    toolbar.barStyle = UIBarStyleBlackOpaque;
+    toolbar.barStyle = UIBarStyleBlack;
     [toolbar sizeToFit];		
     toolbar.autoresizingMask = toolbar.autoresizingMask | UIViewAutoresizingFlexibleWidth;
     
