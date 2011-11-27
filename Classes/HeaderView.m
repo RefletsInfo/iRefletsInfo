@@ -60,9 +60,16 @@
     
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, flexItem, categoriesButtonItem,refreshButtonItem, nil];
+    activityIndicator = [[UIActivityIndicatorView alloc] init];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 20.0f, 20.0f)];
+    [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
+    UIBarButtonItem *activity = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];    
+    
+    
+    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, flexItem, activity, categoriesButtonItem,refreshButtonItem, nil];
     
     //release buttons
+    [activity release];
     [imageButton release];
     [imageButtonItem release];
     [categoriesButtonItem release];
@@ -125,7 +132,7 @@
 
 - (IBAction)actionRefresh:(id)sender 
 {
-    NSLog(@"Refresh");
+    [activityIndicator startAnimating];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshFeeds object:nil];
 }
 

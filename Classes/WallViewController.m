@@ -107,20 +107,18 @@
     if (!view) {
         view = self.view;
     }
-    [MBProgressHUD showHUDAddedTo:view animated:TRUE];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{       
         [self loadFeeds:[self.currentItem objectForKey:@"url"]];
-        [MBProgressHUD hideHUDForView:view animated:TRUE];
     });
 }
 
 - (void) addFlipperView
 {
     if (flipper) {
+        flipper.dataSource = nil;
         flipper.currentPage = 1;
         [flipper removeFromSuperview];
         [flipper release];
-        flipper = nil;
     }
     flipper = [[AFKPageFlipper alloc] initWithFrame:self.view.bounds];
     flipper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -130,7 +128,6 @@
 }
 - (void)loadFeeds:(NSString*)url
 {
-    NSLog(@"Loading feeds at %@", url);
     if (tempMessageArrayCollection) {
         [tempMessageArrayCollection release];
     }
@@ -151,7 +148,6 @@
     
     // Begin parsing
     [feedParser parse];
-    [self addFlipperView];
 }
 
 - (void)saveCache
@@ -171,7 +167,6 @@
         [messageArrayCollection release];
     }
     messageArrayCollection = [[NSMutableArray alloc] initWithArray:array];
-//    [array release];
     [self buildPages:messageArrayCollection];
     [self addFlipperView];
     return YES;
@@ -564,30 +559,40 @@
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser
 {
-    [self closeFullScreen];
-    
-    if (messageArrayCollection) {
-        [messageArrayCollection release];
-    }
-    messageArrayCollection = [[NSMutableArray alloc] initWithArray:tempMessageArrayCollection];
-    [self saveCache];
-    [self buildPages:messageArrayCollection];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+        [self closeFullScreen];
+        
+        if (messageArrayCollection) {
+            [messageArrayCollection release];
+        }
+        messageArrayCollection = [[NSMutableArray alloc] initWithArray:tempMessageArrayCollection];
+        [self saveCache];
+        [self buildPages:messageArrayCollection];
+        [self addFlipperView];
+        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+    });
 }
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error
 {
-    NSLog(@"Hi, error : %@", error);
-    if (tempMessageArrayCollection.count == 0) {
-        return;
-    }
-    [self closeFullScreen];
-    
-    if (messageArrayCollection) {
-        [messageArrayCollection release];
-    }
-    messageArrayCollection = [[NSMutableArray alloc] initWithArray:tempMessageArrayCollection];
-    [self saveCache];
-    [self buildPages:messageArrayCollection];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"Hi, error : %@", error);
+        [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+        if (tempMessageArrayCollection.count == 0) {
+            return;
+        }
+        [self closeFullScreen];
+        
+        if (messageArrayCollection) {
+            [messageArrayCollection release];
+        }
+        messageArrayCollection = [[NSMutableArray alloc] initWithArray:tempMessageArrayCollection];
+        [self saveCache];
+        [self buildPages:messageArrayCollection];
+        [self addFlipperView];
+        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
+    });
 }
 
 @end

@@ -115,12 +115,9 @@
         NSLog(@"Error parsing %@ : %@", self.userName, error);
     }  
     else {
-        NSLog(@"Parsed successfully %@", self.userName);
-        
         HTMLNode * bodyNode = [htmlParser body];
         HTMLNode *imageNode = [bodyNode findChildTag:@"img"];
         if (imageNode) { 
-            NSLog(@"Found image with src: %@", [imageNode getAttributeNamed:@"src"]);
             self.userImage = [imageNode getAttributeNamed:@"src"];
         }        
     }
