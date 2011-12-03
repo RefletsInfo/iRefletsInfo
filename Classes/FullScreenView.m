@@ -45,7 +45,6 @@
 		[contentView setBackgroundColor:RGBCOLOR(255,255,255)];
 		
 		
-		
 		userNameLabel = [[UILabel alloc] init];
 		userNameLabel.font =[UIFont fontWithName:@"Arial-BoldMT" size:30];
 		[userNameLabel setTextColor:RGBCOLOR(0,0,0)];
@@ -72,6 +71,34 @@
 		[webView setFrame:CGRectMake(10, userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 10, 0, 0)];
         [contentView addSubview:webView];
 		
+        webControlBar = [[UIToolbar alloc] init];
+        webControlBar.barStyle = UIBarStyleBlack;
+
+		[webControlBar setFrame:CGRectMake(0, webView.frame.origin.y + webView.frame.size.height + 10, 0, 44)];
+
+        UIImage *imagePrev = [UIImage imageNamed:@"arrowleft.png"];
+        UIButton *buttonPrev = [UIButton buttonWithType:UIButtonTypeCustom];
+        [buttonPrev setImage:imagePrev forState:UIControlStateNormal];
+        buttonPrev.frame = CGRectMake(0.0, 0.0, imagePrev.size.width, imagePrev.size.height);
+        UIBarButtonItem *prevButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonPrev];
+        [buttonPrev addTarget:self action:@selector(actionPrev:) forControlEvents:UIControlEventTouchUpInside];    
+        
+        UIImage *imageNext = [UIImage imageNamed:@"arrowright.png"];
+        UIButton *buttonNext = [UIButton buttonWithType:UIButtonTypeCustom];
+        [buttonNext setImage:imageNext forState:UIControlStateNormal];
+        buttonNext.frame = CGRectMake(0.0, 0.0, imageNext.size.width, imageNext.size.height);
+        UIBarButtonItem *nextButtonItem = [[UIBarButtonItem alloc] initWithCustomView:buttonNext];
+        [buttonNext addTarget:self action:@selector(actionNext:) forControlEvents:UIControlEventTouchUpInside];    
+        
+        NSArray *items = [NSArray arrayWithObjects: prevButtonItem, nextButtonItem, nil];
+
+        [webControlBar setItems:items animated:NO];
+        [buttonPrev release];
+        [imagePrev release];
+            
+        
+        [contentView addSubview:webControlBar];
+        
 		closeButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		UIImageView* closeImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"close-popup.png"]];
 		[closeImage setFrame:CGRectMake(6, 6, 17, 17)];
@@ -105,14 +132,11 @@
     [closeButton setFrame:CGRectMake(contentViewArea.width - 30, 0, 30, 30)];
 
     ///////////////////////////////////////////////////////////////
-    NSString *path = [[NSBundle mainBundle] bundlePath];
-    NSURL *baseURL = [NSURL fileURLWithPath:path];
-    NSString *contentWithCSS = [[NSString alloc] initWithFormat:@"<link rel='stylesheet' href='style.css' type='text/css' media='screen' />%@", messageModel.content];
-    webView.delegate = nil;
-    [webView loadHTMLString:contentWithCSS baseURL:baseURL];
-    [contentWithCSS release];
+    [self displayFeedContent];
     [webView sizeToFit];
-    [webView setFrame:CGRectMake(10, userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 20, contentViewArea.width-20, contentViewArea.height - (userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 20))];
+    [webView setFrame:CGRectMake(10, userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 20, contentViewArea.width-20, contentViewArea.height - (userNameLabel.frame.origin.y + userNameLabel.frame.size.height) -44)];
+
+    [webControlBar setFrame:CGRectMake(0, webView.frame.origin.y + webView.frame.size.height-20, contentViewArea.width, 44)];
 }
 
 
@@ -141,6 +165,21 @@
    }
 }
 
+- (IBAction)actionPrev:(id)sender 
+{
+    if ([webView canGoBack]) {
+        [webView goBack];
+    } else {
+        [self displayFeedContent];
+    }
+}
+
+- (IBAction)actionNext:(id)sender 
+{
+    [webView goForward];
+}
+
+
 -(void)showFields {
 	[self reAdjustLayout]; // i just need this dont know why ... but will look at this later and fix it 
 	
@@ -153,6 +192,16 @@
 	[UIView commitAnimations];
 }
 
+-(void) displayFeedContent 
+{
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSURL *baseURL = [NSURL fileURLWithPath:path];
+    NSString *contentWithCSS = [[NSString alloc] initWithFormat:@"<link rel='stylesheet' href='style.css' type='text/css' media='screen' />%@", messageModel.content];
+    webView.delegate = nil;
+    [webView loadHTMLString:contentWithCSS baseURL:baseURL];
+    [contentWithCSS release];
+}
+
 
 -(void) dealloc {
     [webView release];
@@ -163,6 +212,9 @@
 	userNameLabel=nil;
 	[timeStampLabel release];
 	timeStampLabel=nil;
+    
+    [webControlBar release];
+    webControlBar=nil;
 	[contentView release];
 	contentView=nil;
 	[super dealloc];

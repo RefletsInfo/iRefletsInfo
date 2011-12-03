@@ -40,14 +40,15 @@
 	UILabel* userNameLabel;
 	UILabel* timeStampLabel;
     UIWebView* webView;
-
 	UIViewExtention* viewToOverLap;
 	UIView* fullScreenBG;
 	UIButton* closeButton;
+    UIToolbar *webControlBar;
 }
 
 -(id)initWithModel:(MessageModel*)model;
 -(void)showFields;
+-(void)displayFeedContent;
 
 @property (nonatomic,assign) MessageModel* messageModel;
 @property (nonatomic,assign) UIViewExtention* viewToOverLap;
