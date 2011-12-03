@@ -68,12 +68,13 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCategory:) name:kNotificationChangeCategory object:nil];    
         
-
-        if (![self loadCache]) {
+        if (![self hasConnection]) {
+            [self loadCache];
+        } else {
             [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
             [self loadFeeds:kFeedsURL];
             [MBProgressHUD hideHUDForView:self.view animated:TRUE];
-        };
+        }
     }
     return self;
 }
@@ -92,13 +93,15 @@
     if (dict) {
         self.currentItem = dict;
     }    
-    if (![self loadCache]) {
+    if ([self hasConnection]) {
         [MBProgressHUD showHUDAddedTo:view animated:TRUE];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{       
             [self loadFeeds:[self.currentItem objectForKey:@"url"]];
             [MBProgressHUD hideHUDForView:view animated:TRUE];
         });
-    };
+    } else {
+        [self loadCache];
+    }
 }
 
 -(void) refreshFeeds:(NSNotification *) notification
@@ -110,6 +113,11 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{       
         [self loadFeeds:[self.currentItem objectForKey:@"url"]];
     });
+}
+
+- (BOOL) hasConnection 
+{
+    return ([NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://reflets.info/robots.txt"]]!=NULL)?YES:NO;
 }
 
 - (void) addFlipperView
@@ -578,7 +586,6 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"Hi, error : %@", error);
-        [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
         if (tempMessageArrayCollection.count == 0) {
             return;
         }
@@ -591,7 +598,6 @@
         [self saveCache];
         [self buildPages:messageArrayCollection];
         [self addFlipperView];
-        [MBProgressHUD hideHUDForView:self.view animated:TRUE];
     });
 }
 

@@ -58,6 +58,7 @@
 -(void)loadFeeds:(NSString*)url;
 -(void)saveCache;
 -(BOOL)loadCache;
+-(BOOL)hasConnection;
 
 @property (nonatomic, assign) NSMutableArray* viewControlerStack;
 @property (nonatomic, assign) UIGestureRecognizer* gestureRecognizer;
