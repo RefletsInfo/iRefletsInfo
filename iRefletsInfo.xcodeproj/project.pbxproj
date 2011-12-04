@@ -52,7 +52,6 @@
 		B15AA769146D6FB000131196 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B15AA768146D6FB000131196 /* MBProgressHUD.m */; };
 		B1784C32148A824600E3301E /* arrowleft.png in Resources */ = {isa = PBXBuildFile; fileRef = B1784C30148A824600E3301E /* arrowleft.png */; };
 		B1784C33148A824600E3301E /* arrowright.png in Resources */ = {isa = PBXBuildFile; fileRef = B1784C31148A824600E3301E /* arrowright.png */; };
-		B1784C36148A8CD200E3301E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1784C35148A8CD200E3301E /* CFNetwork.framework */; };
 		B17AF59B142623E6004B50AF /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF58B142623E6004B50AF /* GTMNSString+HTML.m */; };
 		B17AF59C142623E6004B50AF /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF58D142623E6004B50AF /* MWFeedInfo.m */; };
 		B17AF59D142623E6004B50AF /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF58F142623E6004B50AF /* MWFeedItem.m */; };
@@ -178,7 +177,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1784C36148A8CD200E3301E /* CFNetwork.framework in Frameworks */,
 				B1287CE1147379C2004E2F9C /* libxml2.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,

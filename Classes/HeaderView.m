@@ -51,8 +51,6 @@
     UIBarButtonItem *categoriesButtonItem = [[UIBarButtonItem alloc] initWithTitle:wallTitle style:UIBarButtonItemStyleBordered target:self action:@selector(actionChooseCategory:)];
     categoriesButtonItem.tag = 101;
     
-    UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(actionRefresh:)];
-    
     UIBarButtonItem *aboutButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Info", @"") style:UIBarButtonItemStyleBordered target:self action:@selector(actionAbout:)];
 
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -63,12 +61,11 @@
     UIBarButtonItem *activity = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];    
     
     
-    NSArray *items = [NSArray arrayWithObjects: aboutButtonItem, flexItem, activity, categoriesButtonItem,refreshButtonItem, nil];
+    NSArray *items = [NSArray arrayWithObjects: aboutButtonItem, flexItem, activity, categoriesButtonItem, nil];
     
     //release buttons
     [activity release];
     [categoriesButtonItem release];
-    [refreshButtonItem release];
     [flexItem release];
     
     //add array of buttons to toolbar
@@ -140,7 +137,7 @@
         AboutViewController *content = [[AboutViewController alloc] init];
         UIPopoverController *popoverController = [[UIPopoverController alloc] 
                                                   initWithContentViewController:content];
-        popoverController.popoverContentSize = CGSizeMake(420, 500);
+        popoverController.popoverContentSize = CGSizeMake(420, 430);
         content.parent = popoverController;
         [popoverController presentPopoverFromBarButtonItem:sender
                                   permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
