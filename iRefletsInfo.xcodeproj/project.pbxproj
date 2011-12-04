@@ -45,7 +45,6 @@
 		B1287CE1147379C2004E2F9C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B1287CE0147379C2004E2F9C /* libxml2.dylib */; };
 		B12AA0DB147034F6004DE401 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = B12AA0DA147034F6004DE401 /* style.css */; };
 		B144F6FA1478E66C00F1D83B /* CacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B144F6F91478E66C00F1D83B /* CacheManager.m */; };
-		B152A122146FC19100F3E0D0 /* logo-reflets.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A121146FC19100F3E0D0 /* logo-reflets.jpg */; };
 		B152A124146FC22700F3E0D0 /* logo-reflets-header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */; };
 		B152A126146FC8B300F3E0D0 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B152A125146FC8B300F3E0D0 /* Default-Portrait~ipad.png */; };
 		B152A128146FC8B800F3E0D0 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B152A127146FC8B800F3E0D0 /* Default-Landscape~ipad.png */; };
@@ -64,6 +63,8 @@
 		B18C6DA7146FF8E0004AB620 /* logo-reflets-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */; };
 		B193CE76148B799C00DE5FA8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B193CE78148B799C00DE5FA8 /* Localizable.strings */; };
 		B193CE7B148B7D2600DE5FA8 /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */; };
+		B193CE7D148BA38A00DE5FA8 /* missing-reflets.png in Resources */ = {isa = PBXBuildFile; fileRef = B193CE7C148BA38A00DE5FA8 /* missing-reflets.png */; };
+		B193CE7F148BA79A00DE5FA8 /* logo-reflets.png in Resources */ = {isa = PBXBuildFile; fileRef = B193CE7E148BA79A00DE5FA8 /* logo-reflets.png */; };
 		B1E1AFA9148B772300844032 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = B1E1AFAB148B772300844032 /* about.html */; };
 		B1E1AFAD148B772900844032 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E1AFAF148B772900844032 /* AboutViewController.m */; };
 		B1FC4645148B70B700C3682E /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1FC4643148B70B700C3682E /* AboutViewController.xib */; };
@@ -134,7 +135,6 @@
 		B12AA0DA147034F6004DE401 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		B144F6F81478E66C00F1D83B /* CacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheManager.h; sourceTree = "<group>"; };
 		B144F6F91478E66C00F1D83B /* CacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheManager.m; sourceTree = "<group>"; };
-		B152A121146FC19100F3E0D0 /* logo-reflets.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets.jpg"; sourceTree = "<group>"; };
 		B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo-reflets-header.jpg"; sourceTree = "<group>"; };
 		B152A125146FC8B300F3E0D0 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		B152A127146FC8B800F3E0D0 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -164,6 +164,8 @@
 		B193CE77148B799C00DE5FA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B193CE79148B79A200DE5FA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
+		B193CE7C148BA38A00DE5FA8 /* missing-reflets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing-reflets.png"; sourceTree = "<group>"; };
+		B193CE7E148BA79A00DE5FA8 /* logo-reflets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-reflets.png"; sourceTree = "<group>"; };
 		B1E1AFAA148B772300844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/about.html; sourceTree = "<group>"; };
 		B1E1AFAE148B772900844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = en; path = en.lproj/AboutViewController.m; sourceTree = "<group>"; };
 		B1E1AFB0148B772A00844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/AboutViewController.h; sourceTree = "<group>"; };
@@ -329,6 +331,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B193CE7E148BA79A00DE5FA8 /* logo-reflets.png */,
+				B193CE7C148BA38A00DE5FA8 /* missing-reflets.png */,
 				B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */,
 				B193CE78148B799C00DE5FA8 /* Localizable.strings */,
 				B1E1AFAB148B772300844032 /* about.html */,
@@ -337,7 +341,6 @@
 				B12AA0DA147034F6004DE401 /* style.css */,
 				B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */,
 				B152A123146FC22700F3E0D0 /* logo-reflets-header.jpg */,
-				B152A121146FC19100F3E0D0 /* logo-reflets.jpg */,
 				18D45F7A13D4365000BB814D /* close-popup.png */,
 				180E01AB13D1B201005DF14C /* missing-people.png */,
 				1873AC0B13D173AC001A999B /* unselected-page.png */,
@@ -466,7 +469,6 @@
 				180E01AC13D1B201005DF14C /* missing-people.png in Resources */,
 				18D45F7B13D4365000BB814D /* close-popup.png in Resources */,
 				18FD403713DB18460080C465 /* License in Resources */,
-				B152A122146FC19100F3E0D0 /* logo-reflets.jpg in Resources */,
 				B152A124146FC22700F3E0D0 /* logo-reflets-header.jpg in Resources */,
 				B152A126146FC8B300F3E0D0 /* Default-Portrait~ipad.png in Resources */,
 				B152A128146FC8B800F3E0D0 /* Default-Landscape~ipad.png in Resources */,
@@ -480,6 +482,8 @@
 				B1FC4645148B70B700C3682E /* AboutViewController.xib in Resources */,
 				B193CE76148B799C00DE5FA8 /* Localizable.strings in Resources */,
 				B193CE7B148B7D2600DE5FA8 /* bootstrap.min.css in Resources */,
+				B193CE7D148BA38A00DE5FA8 /* missing-reflets.png in Resources */,
+				B193CE7F148BA79A00DE5FA8 /* logo-reflets.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

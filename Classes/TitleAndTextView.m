@@ -80,7 +80,7 @@
 	contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
 	userImageView = [[UIImageView alloc] init];
-    [userImageView setImage:[UIImage imageNamed:@"missing-people.png"]];
+    [userImageView setImage:[UIImage imageNamed:@"missing-reflets.png"]];
     if (messageModel.userImage) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{       
             NSURL *url = [NSURL URLWithString:messageModel.userImage];
