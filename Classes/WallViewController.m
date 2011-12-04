@@ -67,7 +67,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFeeds:) name:kNotificationRefreshFeeds object:nil];    
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCategory:) name:kNotificationChangeCategory object:nil];    
-        
+
         if (![self hasConnection]) {
             [self loadCache];
         } else {
@@ -78,6 +78,7 @@
     }
     return self;
 }
+
 
 -(void) changeCategory:(NSNotification *) notification
 {

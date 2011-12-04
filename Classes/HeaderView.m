@@ -32,6 +32,7 @@
 #import "HeaderView.h"
 #import "Constants.h"
 #import "CategoriesViewController.h"
+#import "AboutViewController.h"
 
 @implementation HeaderView
 
@@ -58,6 +59,8 @@
     
     UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(actionRefresh:)];
     
+    UIBarButtonItem *aboutButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Info" style:UIBarButtonItemStyleBordered target:self action:@selector(actionAbout:)];
+
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     activityIndicator = [[UIActivityIndicatorView alloc] init];
@@ -66,7 +69,7 @@
     UIBarButtonItem *activity = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];    
     
     
-    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, flexItem, activity, categoriesButtonItem,refreshButtonItem, nil];
+    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, aboutButtonItem, flexItem, activity, categoriesButtonItem,refreshButtonItem, nil];
     
     //release buttons
     [activity release];
@@ -134,6 +137,24 @@
 {
     [activityIndicator startAnimating];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshFeeds object:nil];
+}
+
+- (IBAction)actionAbout:(id)sender 
+{
+    if (catAboutController) {
+        [catAboutController dismissPopoverAnimated:YES];
+        catAboutController=nil;
+    } else {
+        AboutViewController *content = [[AboutViewController alloc] init];
+        UIPopoverController *popoverController = [[UIPopoverController alloc] 
+                                                  initWithContentViewController:content];
+        popoverController.popoverContentSize = CGSizeMake(420, 500);
+        content.parent = popoverController;
+        [popoverController presentPopoverFromBarButtonItem:sender
+                                  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        catAboutController = popoverController;
+        [content release];
+    }
 }
 
 @end

@@ -17,4 +17,5 @@
 #define kNotificationStoppedActivity    @"r-stopped-activity"
 #define kNotificationRefreshFeeds       @"r-refresh-feeds"
 #define kNotificationChangeCategory     @"r-change-category"
+#define kNotificationAbout              @"r-about"
 #endif

@@ -34,6 +34,7 @@
 @interface HeaderView : UIView <UIPopoverControllerDelegate>{
 	UIInterfaceOrientation currrentInterfaceOrientation;
     UIActivityIndicatorView *activityIndicator;
+    UIPopoverController *catAboutController;
     UIPopoverController *catPopoverController;
     NSDictionary *currentItem;
 }

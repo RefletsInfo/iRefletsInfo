@@ -62,6 +62,9 @@
 		B17AF5A1142623E6004B50AF /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF598142623E6004B50AF /* NSString+HTML.m */; };
 		B17AF5A2142623E6004B50AF /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF59A142623E6004B50AF /* NSString+XMLEntities.m */; };
 		B18C6DA7146FF8E0004AB620 /* logo-reflets-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */; };
+		B1E1AFA9148B772300844032 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = B1E1AFAB148B772300844032 /* about.html */; };
+		B1E1AFAD148B772900844032 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E1AFAF148B772900844032 /* AboutViewController.m */; };
+		B1FC4645148B70B700C3682E /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1FC4643148B70B700C3682E /* AboutViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +159,10 @@
 		B17AF599142623E6004B50AF /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		B17AF59A142623E6004B50AF /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-reflets-button.png"; sourceTree = "<group>"; };
+		B1E1AFAA148B772300844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/about.html; sourceTree = "<group>"; };
+		B1E1AFAE148B772900844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = en; path = en.lproj/AboutViewController.m; sourceTree = "<group>"; };
+		B1E1AFB0148B772A00844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/AboutViewController.h; sourceTree = "<group>"; };
+		B1FC4643148B70B700C3682E /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +207,9 @@
 				180E006613D19F83005DF14C /* WallViewController.m */,
 				B1242A3A1478B729003A8BE2 /* CategoriesViewController.h */,
 				B1242A3B1478B729003A8BE2 /* CategoriesViewController.m */,
+				B1E1AFB1148B772A00844032 /* AboutViewController.h */,
+				B1E1AFAF148B772900844032 /* AboutViewController.m */,
+				B1FC4643148B70B700C3682E /* AboutViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -313,6 +323,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B1E1AFAB148B772300844032 /* about.html */,
 				B1784C30148A824600E3301E /* arrowleft.png */,
 				B1784C31148A824600E3301E /* arrowright.png */,
 				B12AA0DA147034F6004DE401 /* style.css */,
@@ -455,6 +466,8 @@
 				B1242A3F1478B818003A8BE2 /* Categories.plist in Resources */,
 				B1784C32148A824600E3301E /* arrowleft.png in Resources */,
 				B1784C33148A824600E3301E /* arrowright.png in Resources */,
+				B1E1AFA9148B772300844032 /* about.html in Resources */,
+				B1FC4645148B70B700C3682E /* AboutViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,10 +509,38 @@
 				B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */,
 				B1242A3C1478B729003A8BE2 /* CategoriesViewController.m in Sources */,
 				B144F6FA1478E66C00F1D83B /* CacheManager.m in Sources */,
+				B1E1AFAD148B772900844032 /* AboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B1E1AFAB148B772300844032 /* about.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1E1AFAA148B772300844032 /* en */,
+			);
+			name = about.html;
+			sourceTree = "<group>";
+		};
+		B1E1AFAF148B772900844032 /* AboutViewController.m */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1E1AFAE148B772900844032 /* en */,
+			);
+			name = AboutViewController.m;
+			sourceTree = "<group>";
+		};
+		B1E1AFB1148B772A00844032 /* AboutViewController.h */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1E1AFB0148B772A00844032 /* en */,
+			);
+			name = AboutViewController.h;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

@@ -31,7 +31,7 @@
 
 #import "FlipViewAppDelegate.h"
 #import "WallViewController.h"
-
+#import "Constants.h"
 @implementation FlipViewAppDelegate
 
 @synthesize window;
@@ -93,7 +93,6 @@
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
 }
-
 
 - (void)dealloc {
     [viewController release];
