@@ -62,6 +62,8 @@
 		B17AF5A1142623E6004B50AF /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF598142623E6004B50AF /* NSString+HTML.m */; };
 		B17AF5A2142623E6004B50AF /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF59A142623E6004B50AF /* NSString+XMLEntities.m */; };
 		B18C6DA7146FF8E0004AB620 /* logo-reflets-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */; };
+		B193CE76148B799C00DE5FA8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B193CE78148B799C00DE5FA8 /* Localizable.strings */; };
+		B193CE7B148B7D2600DE5FA8 /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */; };
 		B1E1AFA9148B772300844032 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = B1E1AFAB148B772300844032 /* about.html */; };
 		B1E1AFAD148B772900844032 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E1AFAF148B772900844032 /* AboutViewController.m */; };
 		B1FC4645148B70B700C3682E /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1FC4643148B70B700C3682E /* AboutViewController.xib */; };
@@ -159,9 +161,13 @@
 		B17AF599142623E6004B50AF /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		B17AF59A142623E6004B50AF /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-reflets-button.png"; sourceTree = "<group>"; };
+		B193CE77148B799C00DE5FA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B193CE79148B79A200DE5FA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
 		B1E1AFAA148B772300844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/about.html; sourceTree = "<group>"; };
 		B1E1AFAE148B772900844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = en; path = en.lproj/AboutViewController.m; sourceTree = "<group>"; };
 		B1E1AFB0148B772A00844032 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/AboutViewController.h; sourceTree = "<group>"; };
+		B1E1AFB2148B780900844032 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/about.html; sourceTree = "<group>"; };
 		B1FC4643148B70B700C3682E /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -323,6 +329,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */,
+				B193CE78148B799C00DE5FA8 /* Localizable.strings */,
 				B1E1AFAB148B772300844032 /* about.html */,
 				B1784C30148A824600E3301E /* arrowleft.png */,
 				B1784C31148A824600E3301E /* arrowright.png */,
@@ -433,6 +441,8 @@
 				Japanese,
 				French,
 				German,
+				fr,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -468,6 +478,8 @@
 				B1784C33148A824600E3301E /* arrowright.png in Resources */,
 				B1E1AFA9148B772300844032 /* about.html in Resources */,
 				B1FC4645148B70B700C3682E /* AboutViewController.xib in Resources */,
+				B193CE76148B799C00DE5FA8 /* Localizable.strings in Resources */,
+				B193CE7B148B7D2600DE5FA8 /* bootstrap.min.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,10 +528,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		B193CE78148B799C00DE5FA8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B193CE77148B799C00DE5FA8 /* en */,
+				B193CE79148B79A200DE5FA8 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B1E1AFAB148B772300844032 /* about.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B1E1AFAA148B772300844032 /* en */,
+				B1E1AFB2148B780900844032 /* fr */,
 			);
 			name = about.html;
 			sourceTree = "<group>";

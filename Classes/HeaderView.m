@@ -48,18 +48,12 @@
     [toolbar sizeToFit];		
     toolbar.autoresizingMask = toolbar.autoresizingMask | UIViewAutoresizingFlexibleWidth;
     
-    UIImage *buttonImage = [UIImage imageNamed:@"logo-reflets-button.png"];
-    UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [imageButton setImage:buttonImage forState:UIControlStateNormal];
-    imageButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    UIBarButtonItem *imageButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];
-    
     UIBarButtonItem *categoriesButtonItem = [[UIBarButtonItem alloc] initWithTitle:wallTitle style:UIBarButtonItemStyleBordered target:self action:@selector(actionChooseCategory:)];
     categoriesButtonItem.tag = 101;
     
     UIBarButtonItem *refreshButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(actionRefresh:)];
     
-    UIBarButtonItem *aboutButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Info" style:UIBarButtonItemStyleBordered target:self action:@selector(actionAbout:)];
+    UIBarButtonItem *aboutButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Info", @"") style:UIBarButtonItemStyleBordered target:self action:@selector(actionAbout:)];
 
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -69,12 +63,10 @@
     UIBarButtonItem *activity = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];    
     
     
-    NSArray *items = [NSArray arrayWithObjects: imageButtonItem, aboutButtonItem, flexItem, activity, categoriesButtonItem,refreshButtonItem, nil];
+    NSArray *items = [NSArray arrayWithObjects: aboutButtonItem, flexItem, activity, categoriesButtonItem,refreshButtonItem, nil];
     
     //release buttons
     [activity release];
-    [imageButton release];
-    [imageButtonItem release];
     [categoriesButtonItem release];
     [refreshButtonItem release];
     [flexItem release];

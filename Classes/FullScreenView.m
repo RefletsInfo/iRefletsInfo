@@ -134,9 +134,9 @@
     ///////////////////////////////////////////////////////////////
     [self displayFeedContent];
     [webView sizeToFit];
-    [webView setFrame:CGRectMake(10, userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 20, contentViewArea.width-20, contentViewArea.height - (userNameLabel.frame.origin.y + userNameLabel.frame.size.height) -44)];
+    [webView setFrame:CGRectMake(10, userNameLabel.frame.origin.y + userNameLabel.frame.size.height + 20, contentViewArea.width-20, contentViewArea.height - (userNameLabel.frame.origin.y + userNameLabel.frame.size.height) -64)];
 
-    [webControlBar setFrame:CGRectMake(0, webView.frame.origin.y + webView.frame.size.height-20, contentViewArea.width, 44)];
+    [webControlBar setFrame:CGRectMake(0, webView.frame.origin.y + webView.frame.size.height, contentViewArea.width, 44)];
 }
 
 
@@ -212,11 +212,10 @@
 	userNameLabel=nil;
 	[timeStampLabel release];
 	timeStampLabel=nil;
-    
-    [webControlBar release];
-    webControlBar=nil;
-	[contentView release];
+	
+    [contentView release];
 	contentView=nil;
+        
 	[super dealloc];
 }
 

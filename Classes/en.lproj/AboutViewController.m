@@ -34,7 +34,8 @@
 {
     // Do any additional setup after loading the view from its nib.
     [super viewDidLoad];
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"html"];  
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"about" ofType:@"html" inDirectory:[language stringByAppendingPathExtension:@"lproj"]];  
     NSData *htmlData = [NSData dataWithContentsOfFile:filePath];  
     if (htmlData) {  
         NSString *path = [[NSBundle mainBundle] bundlePath];
