@@ -9,7 +9,7 @@
 #ifndef iRefletsInfo_Constants_h
 #define iRefletsInfo_Constants_h
 #define kFeedsHost                      @"http://reflets.info"
-#define kFeedsURL                       @"http://reflets.info/feed/"
+#define kFeedsURL                       @"http://feeds.feedburner.com/refletsinfo/"
 #define kFeedsSlug                      @"home"
 #define kFlipperViewTag                 42
 

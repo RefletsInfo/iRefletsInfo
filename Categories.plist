@@ -8,7 +8,7 @@
 			<key>slug</key>
 			<string>home</string>
 			<key>url</key>
-			<string>http://reflets.info/feed/</string>
+			<string>http://feeds.feedburner.com/refletsinfo/</string>
 			<key>name</key>
 			<string>Accueil</string>
 		</dict>
