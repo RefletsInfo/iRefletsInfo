@@ -49,7 +49,6 @@
 		B152A126146FC8B300F3E0D0 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B152A125146FC8B300F3E0D0 /* Default-Portrait~ipad.png */; };
 		B152A128146FC8B800F3E0D0 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B152A127146FC8B800F3E0D0 /* Default-Landscape~ipad.png */; };
 		B152A12A146FC8F300F3E0D0 /* icon-app-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B152A129146FC8F300F3E0D0 /* icon-app-ipad.png */; };
-		B15AA769146D6FB000131196 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B15AA768146D6FB000131196 /* MBProgressHUD.m */; };
 		B1784C32148A824600E3301E /* arrowleft.png in Resources */ = {isa = PBXBuildFile; fileRef = B1784C30148A824600E3301E /* arrowleft.png */; };
 		B1784C33148A824600E3301E /* arrowright.png in Resources */ = {isa = PBXBuildFile; fileRef = B1784C31148A824600E3301E /* arrowright.png */; };
 		B17AF59B142623E6004B50AF /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF58B142623E6004B50AF /* GTMNSString+HTML.m */; };
@@ -60,6 +59,7 @@
 		B17AF5A1142623E6004B50AF /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF598142623E6004B50AF /* NSString+HTML.m */; };
 		B17AF5A2142623E6004B50AF /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = B17AF59A142623E6004B50AF /* NSString+XMLEntities.m */; };
 		B18C6DA7146FF8E0004AB620 /* logo-reflets-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */; };
+		B191EEB514B453CA00071C39 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B191EEB314B453CA00071C39 /* MBProgressHUD.m */; };
 		B193CE76148B799C00DE5FA8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B193CE78148B799C00DE5FA8 /* Localizable.strings */; };
 		B193CE7B148B7D2600DE5FA8 /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */; };
 		B193CE7D148BA38A00DE5FA8 /* missing-reflets.png in Resources */ = {isa = PBXBuildFile; fileRef = B193CE7C148BA38A00DE5FA8 /* missing-reflets.png */; };
@@ -139,8 +139,6 @@
 		B152A127146FC8B800F3E0D0 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		B152A129146FC8F300F3E0D0 /* icon-app-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-app-ipad.png"; sourceTree = "<group>"; };
 		B152A12F146FCE2A00F3E0D0 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		B15AA767146D6FB000131196 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ../../../../github/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
-		B15AA768146D6FB000131196 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../../../../github/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		B1784C30148A824600E3301E /* arrowleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowleft.png; sourceTree = "<group>"; };
 		B1784C31148A824600E3301E /* arrowright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowright.png; sourceTree = "<group>"; };
 		B1784C35148A8CD200E3301E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -160,6 +158,8 @@
 		B17AF599142623E6004B50AF /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		B17AF59A142623E6004B50AF /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		B18C6DA6146FF8E0004AB620 /* logo-reflets-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-reflets-button.png"; sourceTree = "<group>"; };
+		B191EEB314B453CA00071C39 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHud/MBProgressHUD.m; sourceTree = "<group>"; };
+		B191EEB414B453CA00071C39 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHud/MBProgressHUD.h; sourceTree = "<group>"; };
 		B193CE77148B799C00DE5FA8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B193CE79148B79A200DE5FA8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B193CE7A148B7D2600DE5FA8 /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
@@ -377,8 +377,8 @@
 		B15AA765146D6F9D00131196 /* MBProgressHud */ = {
 			isa = PBXGroup;
 			children = (
-				B15AA767146D6FB000131196 /* MBProgressHUD.h */,
-				B15AA768146D6FB000131196 /* MBProgressHUD.m */,
+				B191EEB314B453CA00071C39 /* MBProgressHUD.m */,
+				B191EEB414B453CA00071C39 /* MBProgressHUD.h */,
 			);
 			name = MBProgressHud;
 			sourceTree = "<group>";
@@ -518,12 +518,12 @@
 				B17AF5A0142623E6004B50AF /* NSDate+InternetDateTime.m in Sources */,
 				B17AF5A1142623E6004B50AF /* NSString+HTML.m in Sources */,
 				B17AF5A2142623E6004B50AF /* NSString+XMLEntities.m in Sources */,
-				B15AA769146D6FB000131196 /* MBProgressHUD.m in Sources */,
 				B1287CDD1473797C004E2F9C /* HTMLNode.m in Sources */,
 				B1287CDE1473797C004E2F9C /* HTMLParser.m in Sources */,
 				B1242A3C1478B729003A8BE2 /* CategoriesViewController.m in Sources */,
 				B144F6FA1478E66C00F1D83B /* CacheManager.m in Sources */,
 				B1E1AFAD148B772900844032 /* AboutViewController.m in Sources */,
+				B191EEB514B453CA00071C39 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
