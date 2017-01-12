@@ -41,6 +41,21 @@
         NSString *path = [[NSBundle mainBundle] bundlePath];
         NSURL *baseURL = [NSURL fileURLWithPath:path];
         [webView loadData:htmlData MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL:baseURL];  
+
+        //Remove the shadow from the webview.
+        //Code from https://github.com/markrickert/UIWebView-RemoveShadow
+        for(UIScrollView* webScrollView in [webView subviews]) {
+          if ([webScrollView isKindOfClass:[UIScrollView class]]) {
+            for(UIView* subview in [webScrollView subviews]) {
+              if ([subview isKindOfClass:[UIImageView class]]) {
+                ((UIImageView*)subview).image = nil;
+                subview.backgroundColor = [UIColor clearColor];
+              }
+            }
+          }
+        }
+        webView.backgroundColor = [UIColor clearColor];
+        webView.opaque = NO;
     }  
 }
 
